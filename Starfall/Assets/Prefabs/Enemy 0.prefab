@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: -1708498044917602272}
   - component: {fileID: 7231742486217175654}
   - component: {fileID: 6101655713059971648}
-  m_Layer: 0
+  - component: {fileID: -4824109026244778593}
+  m_Layer: 7
   m_Name: Enemy 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128926443578654903}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +37,7 @@ Transform:
   - {fileID: 8866890606209137265}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!114 &-4172291202703179201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,9 +84,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.057017982}
+  m_Offset: {x: 0, y: 0.011043161}
   serializedVersion: 2
-  m_Radius: 0.7007515
+  m_Radius: 0.36973253
 --- !u!114 &7231742486217175654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36d00da198fe784991601f23634e2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 30
 --- !u!114 &6101655713059971648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +113,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+--- !u!114 &-4824109026244778593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128926443578654903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061c7878f1cbfa24d97895ae25ebf656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7783311916390148963, guid: 7ff39355c1183a544ac5ce2c63b5d63e, type: 3}
+  projectileSpeed: 10
+  projectileLifetime: 5
+  baseFiringRate: 1
+  useAI: 1
+  firingRateVariance: 0.5
+  minimumFiringRate: 0.1
+  isFiring: 0
 --- !u!1 &3965102476070604126
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8866890606209137265}
   - component: {fileID: 913482219114476747}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: enemyBlack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 3965102476070604126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5782733429209698264}
@@ -184,8 +205,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8e254c10a7a5360478da53b83e98d7cb, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: dcf8c413dd6ecdf4e993620d8bb801c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

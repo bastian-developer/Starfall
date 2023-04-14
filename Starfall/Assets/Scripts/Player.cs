@@ -17,6 +17,13 @@ public class Player : MonoBehaviour
 
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
+
+    private Shooter _shooter;
+
+    void Awake()
+    {
+        _shooter = GetComponent<Shooter>();
+    }
     
     void Update()
     {
@@ -38,9 +45,15 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         _rawInput = value.Get<Vector2>();
-        Debug.Log(_rawInput);
     }
 
+    void OnFire(InputValue value)
+    {
+        if (_shooter != null)
+        {
+            _shooter.isFiring = value.isPressed;
+        }
+    }
     void Move()
     {
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;
