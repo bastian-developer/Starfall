@@ -11,7 +11,10 @@ public class CameraShake : MonoBehaviour
 
     void Start()
     {
-        _initialPosition = transform.position;
+        _initialPosition = transform.
+            
+            
+            position;
     }
 
     public void Play()
