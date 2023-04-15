@@ -6,7 +6,15 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int health = 50;
-    [SerializeField] private ParticleSystem hitEffect; 
+    [SerializeField] private ParticleSystem hitEffect;
+
+    [SerializeField] private bool applyCameraShake;
+    private CameraShake _cameraShake;
+
+    private void Awake()
+    {
+        _cameraShake = Camera.main.GetComponent<CameraShake>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,10 +24,18 @@ public class Health : MonoBehaviour
         {
             TakeDamage(damageDealer.GetDamage());
             PlayHitEffect();
+            ShakeCamera();
             damageDealer.Hit();
         }
     }
 
+    void ShakeCamera()
+    {
+        if (_cameraShake && applyCameraShake)
+        {
+            _cameraShake.Play();
+        }
+    }
     void TakeDamage(int damage)
     {
         health -= damage;
