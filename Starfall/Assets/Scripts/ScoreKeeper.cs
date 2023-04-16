@@ -6,6 +6,34 @@ public class ScoreKeeper : MonoBehaviour
 {
 
     private int _score;
+    
+    private static ScoreKeeper _scoreKeeperInstance;
+
+    public ScoreKeeper GetInstance()
+    {
+        return _scoreKeeperInstance;
+    }
+    
+    private void Awake()
+    {
+        ManageSingleton();
+    }
+
+    void ManageSingleton()
+    {
+        if(_scoreKeeperInstance != null)
+        {
+            gameObject.SetActive(false);
+            Debug.Log("destroy" + _scoreKeeperInstance.GetInstanceID());
+            Destroy(gameObject);
+        }
+        else
+        {
+            _scoreKeeperInstance = this;
+            Debug.Log("keep" + _scoreKeeperInstance.GetInstanceID());
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     public int GetScore()
     {
@@ -16,7 +44,6 @@ public class ScoreKeeper : MonoBehaviour
     {
         _score += value;
         Mathf.Clamp(_score, 0, int.MaxValue);
-        Debug.Log(_score);
     }
 
     public void ResetScore()

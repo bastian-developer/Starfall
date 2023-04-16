@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,28 @@ public class LevelManager : MonoBehaviour
 {
 
     [SerializeField] private float sceneLoadDelay = 2f;
+
+    private ScoreKeeper _scoreKeeper;
+
+    private void Start()
+    {
+        _scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        Debug.Log("xd1" + _scoreKeeper.GetInstanceID());
+
+    }
     
+    void findScoreKeeper()
+    {
+        if(_scoreKeeper == null)
+        {
+            _scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        }
+    }
+
     public void LoadGame()
     {
+        findScoreKeeper();
+        _scoreKeeper.ResetScore();
         SceneManager.LoadScene("MainScene");
     }
     
