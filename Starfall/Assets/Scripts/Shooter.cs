@@ -86,6 +86,9 @@ public class Shooter : MonoBehaviour
             
             _audioPlayer.PlayShootingClip();
             
+            //Get the private static instance through public getter via SINGLETON
+            //_audioPlayer.GetInstance().PlayShootingClip();
+            
             yield return new WaitForSeconds(timeToNextProjectile);
 
         }
