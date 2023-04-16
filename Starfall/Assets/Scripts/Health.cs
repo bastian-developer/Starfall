@@ -11,11 +11,14 @@ public class Health : MonoBehaviour
     [SerializeField] private ParticleSystem hitEffect;
 
     [SerializeField] private bool applyCameraShake;
+    
     private CameraShake _cameraShake;
     
     private AudioPlayer _audioPlayer;
 
     private ScoreKeeper _scoreKeeper;
+
+    private LevelManager _levelManager;
 
     public int GetHealth()
     {
@@ -27,6 +30,7 @@ public class Health : MonoBehaviour
         _cameraShake = Camera.main.GetComponent<CameraShake>();
         _audioPlayer = FindObjectOfType<AudioPlayer>();
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        _levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -63,6 +67,10 @@ public class Health : MonoBehaviour
         if (!isPlayer)
         {
             _scoreKeeper.ModifyScore(score);
+        }
+        else
+        {
+            _levelManager.LoadGameOver();
         }
         Destroy(gameObject);
     }
