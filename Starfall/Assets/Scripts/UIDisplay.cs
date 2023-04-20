@@ -11,7 +11,8 @@ public class UIDisplay : MonoBehaviour
     
     [Header("Health")]
     [SerializeField] Slider healthSlider;
-    [SerializeField] Health playerHealth;
+
+    private Health _playerHealth;
 
     [Header("Score")]
     [SerializeField] TextMeshProUGUI scoreText;
@@ -20,16 +21,17 @@ public class UIDisplay : MonoBehaviour
     void Awake()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        _playerHealth = FindObjectOfType<Health>();
     }
 
     void Start()
     {
-        healthSlider.maxValue = playerHealth.GetHealth();
+        healthSlider.maxValue = _playerHealth.GetHealth();
     }
 
     void Update()
     {
-        healthSlider.value = playerHealth.GetHealth();
+        healthSlider.value = _playerHealth.GetHealth();
         scoreText.text = _scoreKeeper.GetScore().ToString("000000000");
     }
 

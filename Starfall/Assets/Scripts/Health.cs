@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private bool isPlayer;
     [SerializeField] private int score;
-    [SerializeField] private int health = 50;
+    [SerializeField] private int health = 100;
     [SerializeField] private ParticleSystem hitEffect;
 
     [SerializeField] private bool applyCameraShake;

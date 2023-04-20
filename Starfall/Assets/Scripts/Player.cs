@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float paddingTop;
     [SerializeField] private float paddingBottom;
 
+    private Animator _animator;
+
     private Vector2 _rawInput;
 
     private Vector2 _minBounds;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         _shooter = GetComponent<Shooter>();
+        _animator = GetComponent<Animator>();
     }
     
     void Update()
@@ -57,12 +60,36 @@ public class Player : MonoBehaviour
     void Move()
     {
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;
-        
+
+        if (_rawInput.x == -1)
+        {
+            _animator.SetBool("Left", true);
+            _animator.SetBool("Right", false);
+        }
+        if (_rawInput.x == 1)
+        {
+            _animator.SetBool("Right", true);
+            _animator.SetBool("Left", false);
+        }
+        if (_rawInput.x == 0)
+        {
+            _animator.SetBool("Right", false);
+            _animator.SetBool("Left", false);
+        }
+
+
         Vector2 newPosition = new Vector2();
+        
 
         newPosition.x = Mathf.Clamp(transform.position.x + delta.x, _minBounds.x + paddingLeft, _maxBounds.x - paddingRight);
         newPosition.y = Mathf.Clamp(transform.position.y + delta.y, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop);
         
+        Debug.Log("old = " + _rawInput);
+        //Debug.Log("new = " + newPosition.x);
+
         transform.position = newPosition;
+        
+        //_animator.SetBool("Right", false);
+        //_animator.SetBool("Left", false);
     }
 }
