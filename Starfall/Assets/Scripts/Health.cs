@@ -81,7 +81,16 @@ public class Health : MonoBehaviour
         {
             ParticleSystem instance = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
-            _audioPlayer.PlayDamageClip();
+
+            if (isPlayer)
+            {
+                _audioPlayer.PlayPlayerDamageClip();
+            }
+            else
+            {
+                _audioPlayer.PlayAlienDamageClip();
+            }
+            
         }
     }
 }

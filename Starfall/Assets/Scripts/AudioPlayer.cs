@@ -6,11 +6,19 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    [Header("Shooting")] [SerializeField] AudioClip shootingClip;
-    [SerializeField] [Range(0f, 1f)] float shootingVolume = 1f;
+    [Header("Shooting")] 
+    [SerializeField] AudioClip greenLaserClip;
+    [SerializeField] [Range(0f, 1f)] float greenLaserVolume = 1f;
+    
+    [SerializeField] AudioClip redLaserClip;
+    [SerializeField] [Range(0f, 1f)] float redLaserVolume = 1f;
 
-    [Header("Damage")] [SerializeField] AudioClip damageClip;
-    [SerializeField] [Range(0f, 1f)] float damageVolume = 1f;
+    [Header("Damage")] 
+    [SerializeField] AudioClip playerDamageClip;
+    [SerializeField] [Range(0f, 1f)] float playerDamageVolume = 1f;
+    
+    [SerializeField] AudioClip alienDamageClip;
+    [SerializeField] [Range(0f, 1f)] float alienDamageVolume = 1f;
 
     private static AudioPlayer _audioInstance;
 
@@ -38,15 +46,26 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
-    public void PlayShootingClip()
+    public void PlayGreenLaserClip()
     {
-        PlayClip(shootingClip, shootingVolume);
+        PlayClip(greenLaserClip, greenLaserVolume);
+    }
+    
+    public void PlayRedLaserClip()
+    {
+        PlayClip(redLaserClip, redLaserVolume);
     }
 
-    public void PlayDamageClip()
+    public void PlayAlienDamageClip()
     {
-        PlayClip(damageClip, damageVolume);
+        PlayClip(alienDamageClip, alienDamageVolume);
     }
+    
+    public void PlayPlayerDamageClip()
+    {
+        PlayClip(playerDamageClip, playerDamageVolume);
+    }
+
 
     void PlayClip(AudioClip clip, float volume)
     {

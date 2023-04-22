@@ -83,8 +83,16 @@ public class Shooter : MonoBehaviour
             timeToNextProjectile = Mathf.Clamp(timeToNextProjectile, minimumFiringRate, float.MaxValue);
             
             Destroy(instance, projectileLifetime);
-            
-            _audioPlayer.PlayShootingClip();
+
+            if (useAI)
+            {
+                _audioPlayer.PlayGreenLaserClip();;
+
+            }
+            else
+            {
+                _audioPlayer.PlayRedLaserClip();
+            }
             
             //Get the private static instance through public getter via SINGLETON
             //_audioPlayer.GetInstance().PlayShootingClip();
