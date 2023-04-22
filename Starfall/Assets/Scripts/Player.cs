@@ -75,11 +75,11 @@ public class Player : MonoBehaviour
 
         transform.position = newPosition;
 
-        RotatePlayerToMousePosition();
+        RotateTowardsMousePosition();
 
     }
 
-    void RotatePlayerToMousePosition()
+    void RotateTowardsMousePosition()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         

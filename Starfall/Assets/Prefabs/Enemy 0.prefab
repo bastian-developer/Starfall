@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b74a75a209edd8428be56b4c3904edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationModifier: 90
+  rotationSpeed: 2
 --- !u!50 &6166428603154725379
 Rigidbody2D:
   serializedVersion: 4
@@ -132,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 259425241407390982, guid: d5c4d5f31fa15934bb2d1598ddb73414, type: 3}
-  projectileSpeed: 3
+  projectileSpeed: 2
   projectileLifetime: 2
   baseFiringRate: 1
   useAI: 1

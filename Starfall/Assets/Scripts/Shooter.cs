@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shooter : MonoBehaviour
 {
@@ -22,9 +23,12 @@ public class Shooter : MonoBehaviour
     
     private AudioPlayer _audioPlayer;
 
+    private Player _player;
+
     void Awake()
     {
         _audioPlayer = FindObjectOfType<AudioPlayer>();
+        _player = FindObjectOfType<Player>();
     }
 
     
@@ -68,7 +72,33 @@ public class Shooter : MonoBehaviour
     {
         while (true)
         {
-            GameObject instance = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            GameObject instance;
+            
+            if (useAI && _player)
+            {
+                //Get Player position to calculate bullet direction
+                Vector3 playerPosition = _player.transform.position;
+                Vector3 vectorToTarget = playerPosition - transform.position;
+                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+                Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+                
+                
+                instance = Instantiate(projectilePrefab, transform.position, q);
+                _audioPlayer.PlayGreenLaserClip();;
+
+            }
+            else
+            {
+                //Get Mouse position to calculate bullet direction
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                Vector3 vectorToTarget = mousePosition - transform.position;
+                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+                Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+                
+                
+                instance = Instantiate(projectilePrefab, transform.position, q);
+                _audioPlayer.PlayRedLaserClip();
+            }
 
             Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
             
@@ -84,16 +114,6 @@ public class Shooter : MonoBehaviour
             
             Destroy(instance, projectileLifetime);
 
-            if (useAI)
-            {
-                _audioPlayer.PlayGreenLaserClip();;
-
-            }
-            else
-            {
-                _audioPlayer.PlayRedLaserClip();
-            }
-            
             //Get the private static instance through public getter via SINGLETON
             //_audioPlayer.GetInstance().PlayShootingClip();
             
