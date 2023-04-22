@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e0badb8b2884747a2095ad155b7d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingClip: {fileID: 8300000, guid: d890395174238a34c998bd6b9fb2bafc, type: 3}
+  shootingClip: {fileID: 8300000, guid: 466c713ae2bc302489ec803c06e06911, type: 3}
   shootingVolume: 0.2
-  damageClip: {fileID: 8300000, guid: 325c313a35c62634b8bee52f7d93c024, type: 3}
+  damageClip: {fileID: 8300000, guid: b061dfca3dd9e6043a20e5f1804f60e0, type: 3}
   damageVolume: 0.3
 --- !u!82 &4831546510836547394
 AudioSource:
@@ -59,7 +59,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cdf27d3093a5fd7488cbbaf957ff2674, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f5789c6865764274a93fba170afdbe64, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.71
   m_Pitch: 1
