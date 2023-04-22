@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4287257696508089118}
   - component: {fileID: 4287257696508089185}
   m_Layer: 7
-  m_Name: Enemy 0
+  m_Name: Enemy X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 4287257696508089184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.007713981, y: -0.17906162, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4639853369018820461}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061c7878f1cbfa24d97895ae25ebf656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 259425241407390982, guid: d5c4d5f31fa15934bb2d1598ddb73414, type: 3}
+  projectilePrefab: {fileID: 259425241407390982, guid: 6b748108998bc9640a7fa0422c74f012, type: 3}
   projectileSpeed: 3
   projectileLifetime: 2
   baseFiringRate: 1
