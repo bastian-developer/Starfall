@@ -445,7 +445,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 1.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1319,6 +1319,10 @@ PrefabInstance:
     - target: {fileID: 4831546510836547395, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
+      propertyPath: greenLaserVolume
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
       propertyPath: playerDamageVolume

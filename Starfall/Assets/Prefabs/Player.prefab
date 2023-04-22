@@ -225,6 +225,8 @@ MonoBehaviour:
   paddingRight: 0.1
   paddingTop: 0.2
   paddingBottom: 0.2
+  rotationModifier: 90
+  rotationSpeed: 10
 --- !u!114 &1182905877200679917
 MonoBehaviour:
   m_ObjectHideFlags: 0

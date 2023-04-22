@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float paddingRight;
     [SerializeField] private float paddingTop;
     [SerializeField] private float paddingBottom;
+    
+    [SerializeField] private float rotationModifier;
+    [SerializeField] private float rotationSpeed;
 
     private Animator _animator;
 
@@ -61,6 +65,32 @@ public class Player : MonoBehaviour
     {
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;
 
+        AnimatePlayer();
+
+
+        Vector2 newPosition = new Vector2();
+        
+        newPosition.x = Mathf.Clamp(transform.position.x + delta.x, _minBounds.x + paddingLeft, _maxBounds.x - paddingRight);
+        newPosition.y = Mathf.Clamp(transform.position.y + delta.y, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop);
+
+        transform.position = newPosition;
+
+        RotatePlayerToMousePosition();
+
+    }
+
+    void RotatePlayerToMousePosition()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        
+        Vector3 vectorToTarget = mousePosition - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - rotationModifier;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
+    }
+
+    void AnimatePlayer()
+    {
         if (_rawInput.x == -1)
         {
             _animator.SetBool("Left", true);
@@ -76,20 +106,5 @@ public class Player : MonoBehaviour
             _animator.SetBool("Right", false);
             _animator.SetBool("Left", false);
         }
-
-
-        Vector2 newPosition = new Vector2();
-        
-
-        newPosition.x = Mathf.Clamp(transform.position.x + delta.x, _minBounds.x + paddingLeft, _maxBounds.x - paddingRight);
-        newPosition.y = Mathf.Clamp(transform.position.y + delta.y, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop);
-        
-        Debug.Log("old = " + _rawInput);
-        //Debug.Log("new = " + newPosition.x);
-
-        transform.position = newPosition;
-        
-        //_animator.SetBool("Right", false);
-        //_animator.SetBool("Left", false);
     }
 }
