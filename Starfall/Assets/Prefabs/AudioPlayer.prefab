@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greenLaserClip: {fileID: 8300000, guid: 466c713ae2bc302489ec803c06e06911, type: 3}
-  greenLaserVolume: 0.237
+  greenLaserVolume: 0.15
   redLaserClip: {fileID: 8300000, guid: e9f90fa90eaea28429404d36a40d0af8, type: 3}
-  redLaserVolume: 0.359
+  redLaserVolume: 0.289
   playerDamageClip: {fileID: 8300000, guid: 9a6a53d1fedc2434aa5df08e70ec053f, type: 3}
-  playerDamageVolume: 1
+  playerDamageVolume: 0.412
   alienDamageClip: {fileID: 8300000, guid: b061dfca3dd9e6043a20e5f1804f60e0, type: 3}
   alienDamageVolume: 0.41
 --- !u!82 &4831546510836547394
