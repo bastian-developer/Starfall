@@ -343,7 +343,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 904580522}
+      - m_Target: {fileID: 981705996}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 1
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 904580522}
+      - m_Target: {fileID: 981705996}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: LoadMenu
         m_Mode: 1
@@ -811,6 +811,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6454684816930590588, guid: 9cd8e782309201d41b0a100d048be275, type: 3}
+      propertyPath: moveSpeed.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454684818247600659, guid: 9cd8e782309201d41b0a100d048be275, type: 3}
+      propertyPath: moveSpeed.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6454684818275836110, guid: 9cd8e782309201d41b0a100d048be275, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -996,17 +1004,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744204932}
   m_CullTransparentMesh: 1
---- !u!114 &904580522 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9092592138337958888, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}
-  m_PrefabInstance: {fileID: 981705995}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6ef582dd299b8e47886359a4298be1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &913186128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1255,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1596081773168779964, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}
+      propertyPath: sceneLoadDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1848098531204637921, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -1268,6 +1269,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}
+--- !u!114 &981705996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1596081773168779964, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}
+  m_PrefabInstance: {fileID: 981705995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ef582dd299b8e47886359a4298be1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1220840662
 GameObject:
   m_ObjectHideFlags: 0
