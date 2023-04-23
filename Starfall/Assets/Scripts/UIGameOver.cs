@@ -17,6 +17,6 @@ public class UIGameOver : MonoBehaviour
 
     private void Start()
     {
-        scoreText.text = "You Scored:\n" + _scoreKeeper.GetScore();
+        scoreText.text = "Score:\n" + _scoreKeeper.GetScore();
     }
 }
