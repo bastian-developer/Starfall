@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shakeDuration: 0.5
-  shakeMagnitude: 0.02
+  shakeMagnitude: 0.04
 --- !u!1 &861091778
 GameObject:
   m_ObjectHideFlags: 0
