@@ -7,15 +7,14 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
 
-    [SerializeField] private float sceneLoadDelay = 2f;
+    [SerializeField] private float sceneLoadDelay = 1f;
 
     private ScoreKeeper _scoreKeeper;
+    
 
     private void Start()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
-        Debug.Log("xd1" + _scoreKeeper.GetInstanceID());
-
     }
     
     void findScoreKeeper()
@@ -30,27 +29,42 @@ public class LevelManager : MonoBehaviour
     {
         findScoreKeeper();
         _scoreKeeper.ResetScore();
-        SceneManager.LoadScene("MainScene");
+        
+
+        //SceneManager.LoadScene("MainScene");
+        
+        
+        StartCoroutine(WaitAndLoad("MainScene", sceneLoadDelay));
     }
+
     
     public void LoadMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+        StartCoroutine(WaitAndLoad("MainMenu", sceneLoadDelay));
     }
     
     public void LoadGameOver()
     {
+        //StartCoroutine(WaitAndLoad("GameOver", sceneLoadDelay));
         StartCoroutine(WaitAndLoad("GameOver", sceneLoadDelay));
     }
     
     public void QuitGame()
     {
-        Application.Quit();
+        //Application.Quit();
+        StartCoroutine(WaitAndQuit(sceneLoadDelay));
     }
 
     IEnumerator WaitAndLoad(string sceneName, float delay)
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(sceneName);
+    }
+    
+    IEnumerator WaitAndQuit(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Application.Quit();
     }
 }

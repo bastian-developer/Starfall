@@ -20,7 +20,15 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip alienDamageClip;
     [SerializeField] [Range(0f, 1f)] float alienDamageVolume = 1f;
 
+    [Header("Menu")] 
+    [SerializeField] AudioClip buttonPressedClip;
+    [SerializeField] [Range(0f, 1f)] float buttonPressedVolume = 1f;
+    [SerializeField] AudioClip buttonHoverClip;
+    [SerializeField] [Range(0f, 1f)] float buttonHoverVolume = 1f;
+    
+    
     private static AudioPlayer _audioInstance;
+    
 
     public AudioPlayer GetInstance()
     {
@@ -64,6 +72,17 @@ public class AudioPlayer : MonoBehaviour
     public void PlayPlayerDamageClip()
     {
         PlayClip(playerDamageClip, playerDamageVolume);
+    }
+    
+    public void PlayButtonPressedClip()
+    {
+        PlayClip(buttonPressedClip, buttonPressedVolume);
+    }
+    
+    
+    public void PlayButtonHoverClip()
+    {
+        PlayClip(buttonHoverClip, buttonHoverVolume);
     }
 
 

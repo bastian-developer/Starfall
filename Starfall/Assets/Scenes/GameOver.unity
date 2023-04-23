@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 168460713}
   - component: {fileID: 168460712}
   - component: {fileID: 168460711}
+  - component: {fileID: 168460714}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -322,7 +323,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0.6666667}
     m_PressedColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0.6666667}
-    m_SelectedColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0.6666667}
+    m_SelectedColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
@@ -345,6 +346,18 @@ MonoBehaviour:
       - m_Target: {fileID: 904580522}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayButtonPressedClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -392,6 +405,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168460709}
   m_CullTransparentMesh: 1
+--- !u!114 &168460714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168460709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
+          m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+          m_MethodName: PlayButtonHoverClip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &321523189
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +446,7 @@ GameObject:
   - component: {fileID: 321523193}
   - component: {fileID: 321523192}
   - component: {fileID: 321523191}
+  - component: {fileID: 321523194}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -456,7 +499,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0.6666667}
     m_PressedColor: {r: 0.037425358, g: 0.03773582, b: 0.03720182, a: 1}
-    m_SelectedColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0.6666667}
+    m_SelectedColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0}
     m_DisabledColor: {r: 0.25625226, g: 0.31132078, b: 0.2011837, a: 0.6666667}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
@@ -479,6 +522,18 @@ MonoBehaviour:
       - m_Target: {fileID: 904580522}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: LoadMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
+        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+        m_MethodName: PlayButtonPressedClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -526,6 +581,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321523189}
   m_CullTransparentMesh: 1
+--- !u!114 &321523194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321523189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
+          m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
+          m_MethodName: PlayButtonHoverClip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &402759581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,6 +1261,10 @@ PrefabInstance:
     - target: {fileID: 1848098531204637921, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}
       propertyPath: m_Name
       value: LevelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092592138337958888, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}
+      propertyPath: sceneLoadDelay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f94b8fbfb7335c4ca4ab966eaa93fe3, type: 3}

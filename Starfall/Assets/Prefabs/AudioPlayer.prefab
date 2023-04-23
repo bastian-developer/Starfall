@@ -53,6 +53,10 @@ MonoBehaviour:
   playerDamageVolume: 0.412
   alienDamageClip: {fileID: 8300000, guid: b061dfca3dd9e6043a20e5f1804f60e0, type: 3}
   alienDamageVolume: 0.41
+  buttonPressedClip: {fileID: 8300000, guid: 0af14d89c5f2e85419795550d9a3eaf6, type: 3}
+  buttonPressedVolume: 0.6
+  buttonHoverClip: {fileID: 8300000, guid: 04c41ba31da28bd40b0d40be06f05790, type: 3}
+  buttonHoverVolume: 0.6
 --- !u!82 &4831546510836547394
 AudioSource:
   m_ObjectHideFlags: 0

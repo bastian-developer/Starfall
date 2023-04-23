@@ -24,13 +24,11 @@ public class ScoreKeeper : MonoBehaviour
         if(_scoreKeeperInstance != null)
         {
             gameObject.SetActive(false);
-            Debug.Log("destroy" + _scoreKeeperInstance.GetInstanceID());
             Destroy(gameObject);
         }
         else
         {
             _scoreKeeperInstance = this;
-            Debug.Log("keep" + _scoreKeeperInstance.GetInstanceID());
             DontDestroyOnLoad(gameObject);
         }
     }
