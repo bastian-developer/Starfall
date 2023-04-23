@@ -68,6 +68,15 @@ public class Shooter : MonoBehaviour
         }
     }
 
+    public Quaternion Vector3ToQuaternion(Vector3 vector)
+    {
+        Vector3 vectorToTarget = vector - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        
+        return q;
+    }
+
     IEnumerator FireContinuosly()
     {
         while (true)
@@ -78,12 +87,7 @@ public class Shooter : MonoBehaviour
             {
                 //Get Player position to calculate bullet direction
                 Vector3 playerPosition = _player.transform.position;
-                Vector3 vectorToTarget = playerPosition - transform.position;
-                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-                Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-                
-                
-                instance = Instantiate(projectilePrefab, transform.position, q);
+                instance = Instantiate(projectilePrefab, transform.position, Vector3ToQuaternion(playerPosition));
                 _audioPlayer.PlayGreenLaserClip();;
 
             }
@@ -91,12 +95,7 @@ public class Shooter : MonoBehaviour
             {
                 //Get Mouse position to calculate bullet direction
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-                Vector3 vectorToTarget = mousePosition - transform.position;
-                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-                Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-                
-                
-                instance = Instantiate(projectilePrefab, transform.position, q);
+                instance = Instantiate(projectilePrefab, transform.position, Vector3ToQuaternion(mousePosition));
                 _audioPlayer.PlayRedLaserClip();
             }
 
