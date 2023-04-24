@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: InfernalGames
   productName: Starfall
-  defaultCursor: {fileID: 2800000, guid: df5a0eb4b0d809141bb60fef692577e7, type: 3}
+  defaultCursor: {fileID: 2800000, guid: c8324a90aea597042a283c3addffaa78, type: 3}
   cursorHotspot: {x: 16, y: 16}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1

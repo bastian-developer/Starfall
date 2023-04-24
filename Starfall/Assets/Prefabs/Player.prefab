@@ -221,8 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  paddingLeft: 0.1
-  paddingRight: 0.1
+  paddingLeft: 0.15
+  paddingRight: 0.15
   paddingTop: 0.2
   paddingBottom: 0.35
   rotationModifier: 90
