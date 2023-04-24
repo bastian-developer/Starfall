@@ -106,7 +106,7 @@ MonoBehaviour:
   isPlayer: 0
   score: 50
   health: 30
-  hitEffect: {fileID: 3420023136322087538, guid: 898eda81e063b6d44928f0a468535e4a, type: 3}
+  hitEffect: {fileID: 3420023136322087538, guid: a82cceafc705d294c8ffe90a71bdd4b0, type: 3}
   applyCameraShake: 0
 --- !u!114 &1629074917635414513
 MonoBehaviour:

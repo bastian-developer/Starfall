@@ -224,7 +224,7 @@ MonoBehaviour:
   paddingLeft: 0.1
   paddingRight: 0.1
   paddingTop: 0.2
-  paddingBottom: 0.2
+  paddingBottom: 0.35
   rotationModifier: 90
   rotationSpeed: 20
 --- !u!114 &1182905877200679917
