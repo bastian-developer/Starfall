@@ -8,10 +8,51 @@ public class LevelManager : MonoBehaviour
 {
 
     [SerializeField] private float sceneLoadDelay = 1f;
-
-    private ScoreKeeper _scoreKeeper;
     
+    [SerializeField] private Animator animator;
+    
+    
+    private ScoreKeeper _scoreKeeper;
 
+    
+    /*
+    private static LevelManager _levelManagerInstance;
+
+    //
+    public LevelManager GetInstance()
+    {
+        return _levelManagerInstance;
+    }
+
+    //
+    private void Awake()
+    {
+        ManageSingleton();
+    }
+
+    //
+    void ManageSingleton()
+    {
+        
+        Debug.Log("out" +_levelManagerInstance);
+        
+        if(_levelManagerInstance != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+            
+            Debug.Log("!= null" +_levelManagerInstance);
+        }
+        else
+        {
+            _levelManagerInstance = this;
+            DontDestroyOnLoad(gameObject);
+            
+            Debug.Log("else" +_levelManagerInstance);
+        }
+    }
+    */
+    
     private void Start()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -32,28 +73,36 @@ public class LevelManager : MonoBehaviour
         
 
         //SceneManager.LoadScene("MainScene");
-        
-        
+
+        StartCrossfadeTransition();
         StartCoroutine(WaitAndLoad("MainScene", sceneLoadDelay));
     }
 
     
-    public void LoadMenu()
-    {
-        //SceneManager.LoadScene("MainMenu");
-        StartCoroutine(WaitAndLoad("MainMenu", sceneLoadDelay));
-    }
-    
     public void LoadGameOver()
     {
         //StartCoroutine(WaitAndLoad("GameOver", sceneLoadDelay));
+        StartCrossfadeTransition();
         StartCoroutine(WaitAndLoad("GameOver", sceneLoadDelay));
+    }
+    
+    public void LoadMenu()
+    {
+        //SceneManager.LoadScene("MainMenu");
+        StartCrossfadeTransition();
+        StartCoroutine(WaitAndLoad("MainMenu", sceneLoadDelay));
     }
     
     public void QuitGame()
     {
         //Application.Quit();
+        StartCrossfadeTransition();
         StartCoroutine(WaitAndQuit(sceneLoadDelay));
+    }
+
+    public void StartCrossfadeTransition()
+    {
+        animator.SetTrigger("Start");
     }
 
     IEnumerator WaitAndLoad(string sceneName, float delay)

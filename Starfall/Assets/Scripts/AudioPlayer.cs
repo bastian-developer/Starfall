@@ -92,8 +92,6 @@ public class AudioPlayer : MonoBehaviour
         {
             Vector3 cameraPos = Camera.main.transform.position;
             AudioSource.PlayClipAtPoint(clip, cameraPos, volume);
-
-
         }
     }
 }
