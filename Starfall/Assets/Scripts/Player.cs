@@ -65,7 +65,8 @@ public class Player : MonoBehaviour
     {
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;
 
-        AnimatePlayer();
+        //Disabled because we're using just iddle animation for now
+        //AnimatePlayer();
 
 
         Vector2 newPosition = new Vector2();

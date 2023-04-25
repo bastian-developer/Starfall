@@ -83,36 +83,42 @@ public class Shooter : MonoBehaviour
         {
             GameObject instance;
             
-            if (useAI && _player)
-            {
-                //Get Player position to calculate bullet direction
-                Vector3 playerPosition = _player.transform.position;
-                instance = Instantiate(projectilePrefab, transform.position, Vector3ToQuaternion(playerPosition));
-                _audioPlayer.PlayGreenLaserClip();;
-
-            }
-            else
-            {
-                //Get Mouse position to calculate bullet direction
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-                instance = Instantiate(projectilePrefab, transform.position, Vector3ToQuaternion(mousePosition));
-                _audioPlayer.PlayRedLaserClip();
-            }
-
-            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
             
-            if (rb != null)
+            if (_player)
             {
-                rb.velocity = transform.up * projectileSpeed;
+                Vector3 playerPosition = _player.transform.position;
+                Quaternion playerRotation = _player.transform.rotation;
+
+
+                if (useAI)
+                {
+                    instance = Instantiate(projectilePrefab, transform.position, Vector3ToQuaternion(playerPosition));
+                    _audioPlayer.PlayGreenLaserClip();;
+                }else
+                {
+                    //Get Mouse position to calculate bullet direction
+                    //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                    instance = Instantiate(projectilePrefab, transform.position, playerRotation);
+                    _audioPlayer.PlayRedLaserClip();
+                }
+                
+                Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+            
+                if (rb != null)
+                {
+                    rb.velocity = transform.up * projectileSpeed;
+                }
+                
+                Destroy(instance, projectileLifetime);
             }
+            
             
             float timeToNextProjectile = Random.Range(baseFiringRate - firingRateVariance,
                 baseFiringRate + firingRateVariance);
             
             timeToNextProjectile = Mathf.Clamp(timeToNextProjectile, minimumFiringRate, float.MaxValue);
             
-            Destroy(instance, projectileLifetime);
-
+            
             //Get the private static instance through public getter via SINGLETON
             //_audioPlayer.GetInstance().PlayShootingClip();
             
