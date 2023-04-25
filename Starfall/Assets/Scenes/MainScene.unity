@@ -212,7 +212,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.zoom
-      value: 1.001
+      value: 1.139
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: startConfig
@@ -220,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6a4cfee667ae5420fbc0ff45d34bb1d5, type: 2}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.vignette
-      value: 0.292
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.dithering4
@@ -228,11 +232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.dithering8
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.innerCurve
-      value: 2.34
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: _runtimeMaterial
@@ -240,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 2145031954}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.monitorCurve
-      value: 0.08
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.monitorColor.a
@@ -248,15 +252,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.monitorColor.b
-      value: 0.16037738
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.monitorColor.g
-      value: 0.12775578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.monitorColor.r
-      value: 0.121796034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.monitorTexture
@@ -264,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.pixelationAmount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.innerMonitorShine
@@ -296,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.colorScans.sizeMultiplier
-      value: 3.3
+      value: 3.29
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.maxColorChannels.greyScale
@@ -304,11 +308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.colorScans.greenChannelMultiplier
-      value: -0.331
+      value: -0.355
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274908, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: data.colorScans.redBlueChannelMultiplier
-      value: -0.309
+      value: -0.334
       objectReference: {fileID: 0}
     - target: {fileID: 8624242482455274909, guid: 10603048f9dd8804498c904bb8c240e1, type: 3}
       propertyPath: m_RootOrder

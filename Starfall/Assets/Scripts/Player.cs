@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;
 
         //Disabled because we're using just iddle animation for now
-        //AnimatePlayer();
+        AnimatePlayer();
 
 
         Vector2 newPosition = new Vector2();
@@ -92,16 +92,43 @@ public class Player : MonoBehaviour
         {
             _animator.SetBool("Left", true);
             _animator.SetBool("Right", false);
+            _animator.SetBool("Up", false);
+            _animator.SetBool("Down", false);
         }
         if (_rawInput.x == 1)
         {
             _animator.SetBool("Right", true);
+            _animator.SetBool("Left", false);
+            _animator.SetBool("Up", false);
+            _animator.SetBool("Down", false);
+        }
+        if (_rawInput.y == -1)
+        {
+            _animator.SetBool("Up", false);
+            _animator.SetBool("Down", true);
+            _animator.SetBool("Right", false);
+            _animator.SetBool("Left", false);
+        }
+        if (_rawInput.y == 1)
+        {
+            _animator.SetBool("Up", true);
+            _animator.SetBool("Down", false);
+            _animator.SetBool("Right", false);
             _animator.SetBool("Left", false);
         }
         if (_rawInput.x == 0)
         {
             _animator.SetBool("Right", false);
             _animator.SetBool("Left", false);
+  
+            
+        }
+        if (_rawInput.y == 0)
+        {
+
+            _animator.SetBool("Up", false);
+            _animator.SetBool("Down", false);
+            
         }
     }
 }
