@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f111e6cec06cced4ab8b49831a6d1cc7
+guid: 92f501b2650e32f4e9e95b25d377f484
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -140,13 +140,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerSprite-Sheet_0
+      name: BlueLaser_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 14
-        height: 17
+        width: 1
+        height: 3
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 310d8eb479a49544b964c23af834fa13
-      internalID: -429828432
+      spriteID: a881a20bde4051545a5f7d05ab13e5df
+      internalID: 878290932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSprite-Sheet_1
+      name: BlueLaser_1
       rect:
         serializedVersion: 2
-        x: 17
+        x: 1
         y: 0
-        width: 14
-        height: 17
+        width: 1
+        height: 3
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c93fbbbb8224c824abbf341763a66ea9
-      internalID: 1203228864
+      spriteID: 39f1ff622c6961843b466f751e8c0d65
+      internalID: -2002325637
       vertices: []
       indices: 
       edges: []
@@ -192,8 +192,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerSprite-Sheet_0: -429828432
-      PlayerSprite-Sheet_1: 1203228864
+      BlueLaser_1: -2002325637
+      BlueLaser_0: 878290932
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

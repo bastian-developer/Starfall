@@ -143,7 +143,7 @@ MonoBehaviour:
   paddingTop: 0.2
   paddingBottom: 0.35
   rotationModifier: 90
-  rotationSpeed: 2
+  rotationSpeed: 3
 --- !u!114 &3947010096850248164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061c7878f1cbfa24d97895ae25ebf656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7073922450952480164, guid: 29ed86762895ebe4185f3e7371a5fdf9, type: 3}
+  projectilePrefab: {fileID: 7306692227792423664, guid: 2c49c2f39efbf0e43827e5dba3c4f663, type: 3}
   projectileSpeed: 3
   projectileLifetime: 2
   baseFiringRate: 0.2
@@ -230,7 +230,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.14, y: 0.16}
+  m_Size: {x: 0.01, y: 0.03}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -493,15 +493,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5885155692561272878, guid: 291e5135231bb90469931c0af00ced3a, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
-      value: 0
+      value: 0.98039216
       objectReference: {fileID: 0}
     - target: {fileID: 5885155692561272878, guid: 291e5135231bb90469931c0af00ced3a, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.g
-      value: 0.3267678
+      value: 0.20087373
       objectReference: {fileID: 0}
     - target: {fileID: 5885155692561272878, guid: 291e5135231bb90469931c0af00ced3a, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.r
-      value: 0.9811321
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5885155692561272878, guid: 291e5135231bb90469931c0af00ced3a, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.r

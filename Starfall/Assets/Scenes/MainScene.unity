@@ -1481,6 +1481,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
+      propertyPath: redLaserClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ea2d20c51ccc7c44aaa30aa946870de5, type: 3}
+    - target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
+      propertyPath: redLaserVolume
+      value: 0.343
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831546510836547396, guid: 228779e5658c113459c3982d09df6c5e, type: 3}
       propertyPath: greenLaserVolume
       value: 0.17
       objectReference: {fileID: 0}

@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greenLaserClip: {fileID: 8300000, guid: 466c713ae2bc302489ec803c06e06911, type: 3}
   greenLaserVolume: 0.15
-  redLaserClip: {fileID: 8300000, guid: e9f90fa90eaea28429404d36a40d0af8, type: 3}
-  redLaserVolume: 0.289
+  redLaserClip: {fileID: 8300000, guid: ea2d20c51ccc7c44aaa30aa946870de5, type: 3}
+  redLaserVolume: 0.4
   playerDamageClip: {fileID: 8300000, guid: 9a6a53d1fedc2434aa5df08e70ec053f, type: 3}
   playerDamageVolume: 0.412
   alienDamageClip: {fileID: 8300000, guid: b061dfca3dd9e6043a20e5f1804f60e0, type: 3}
