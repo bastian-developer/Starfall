@@ -19,6 +19,8 @@ public class Health : MonoBehaviour
     private ScoreKeeper _scoreKeeper;
 
     private LevelManager _levelManager;
+    
+    private Animator _animator;
 
     public int GetHealth()
     {
@@ -31,6 +33,7 @@ public class Health : MonoBehaviour
         _audioPlayer = FindObjectOfType<AudioPlayer>();
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         _levelManager = FindObjectOfType<LevelManager>();
+        _animator = FindObjectOfType<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -42,6 +45,7 @@ public class Health : MonoBehaviour
             TakeDamage(damageDealer.GetDamage());
             PlayHitEffect();
             ShakeCamera();
+            _animator.SetTrigger("Hit");
             damageDealer.Hit();
         }
     }

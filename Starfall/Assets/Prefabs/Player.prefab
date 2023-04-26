@@ -140,8 +140,8 @@ MonoBehaviour:
   moveSpeed: 1
   paddingLeft: 0.15
   paddingRight: 0.15
-  paddingTop: 0.2
-  paddingBottom: 0.35
+  paddingTop: 0.45
+  paddingBottom: 0.2
   rotationModifier: 90
   rotationSpeed: 3
 --- !u!114 &3947010096850248164

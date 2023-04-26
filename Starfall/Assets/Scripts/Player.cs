@@ -64,8 +64,7 @@ public class Player : MonoBehaviour
     void Move()
     {
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;
-
-        //Disabled because we're using just iddle animation for now
+        
         AnimatePlayer();
 
 
@@ -86,6 +85,8 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, _shooter.Vector3ToQuaternion(mousePosition), Time.deltaTime * rotationSpeed);
     }
 
+    
+    
     void AnimatePlayer()
     {
         if (_rawInput.x == -1)
