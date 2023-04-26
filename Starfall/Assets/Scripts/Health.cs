@@ -45,7 +45,12 @@ public class Health : MonoBehaviour
             TakeDamage(damageDealer.GetDamage());
             PlayHitEffect();
             ShakeCamera();
-            _animator.SetTrigger("Hit");
+
+            if (isPlayer)
+            {
+                _animator.SetTrigger("Hit");
+            }
+            
             damageDealer.Hit();
         }
     }
