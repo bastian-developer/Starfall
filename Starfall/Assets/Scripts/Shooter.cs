@@ -19,7 +19,7 @@ public class Shooter : MonoBehaviour
 
     [HideInInspector] public bool isFiring;
 
-    private Coroutine firingCoroutine;
+    private Coroutine _firingCoroutine;
     
     private AudioPlayer _audioPlayer;
 
@@ -43,28 +43,28 @@ public class Shooter : MonoBehaviour
     void Update()
     {
         // Call Fire() only when isFiring state changes
-        if (isFiring && firingCoroutine == null)
+        if (isFiring && _firingCoroutine == null)
         {
             Fire();
         }
-        else if (!isFiring && firingCoroutine != null)
+        else if (!isFiring && _firingCoroutine != null)
         {
-            StopCoroutine(firingCoroutine);
-            firingCoroutine = null;
+            StopCoroutine(_firingCoroutine);
+            _firingCoroutine = null;
         }
     }
 
     void Fire()
     {
-        if (isFiring && firingCoroutine == null)
+        if (isFiring && _firingCoroutine == null)
         {
-            firingCoroutine = StartCoroutine(FireContinuosly());
+            _firingCoroutine = StartCoroutine(FireContinuosly());
         }
-        else if(!isFiring && firingCoroutine != null)
+        else if(!isFiring && _firingCoroutine != null)
         {
             //StopAllCoroutines();
-            StopCoroutine(firingCoroutine);
-            firingCoroutine = null;
+            StopCoroutine(_firingCoroutine);
+            _firingCoroutine = null;
         }
     }
 

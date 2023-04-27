@@ -7,19 +7,27 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [Header("Powers")]
+    [SerializeField] private Shield shieldPrefab;
+    
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 12f;
+    [SerializeField] private float rotationModifier;
+    [SerializeField] private float rotationSpeed;
+    
+    [Header("Padding")]
     [SerializeField] private float paddingLeft;
     [SerializeField] private float paddingRight;
     [SerializeField] private float paddingTop;
     [SerializeField] private float paddingBottom;
-    [SerializeField] private float rotationModifier;
-    [SerializeField] private float rotationSpeed;
+
     
     private Animator _animator;
     private Vector2 _rawInput;
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
     private Shooter _shooter;
+    
 
     void Awake()
     {
@@ -56,6 +64,14 @@ public class Player : MonoBehaviour
             _shooter.isFiring = value.isPressed;
         }
     }
+
+    void OnShield(InputValue value)
+    {
+        shieldPrefab.gameObject.SetActive(true);
+        
+    }
+
+
     void Move()
     {
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;

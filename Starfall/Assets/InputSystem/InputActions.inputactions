@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Shield",
+                    "type": "Button",
+                    "id": "ed418d69-9b0f-41a3-af53-c48b6d0f0495",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -256,12 +265,12 @@
                 },
                 {
                     "name": "",
-                    "id": "d70d4855-de46-4d13-b81a-67d3371f8d9b",
+                    "id": "9b57e549-8f5f-4fda-bc3e-f67eb4ee1857",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Fire",
+                    "groups": "",
+                    "action": "Shield",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
