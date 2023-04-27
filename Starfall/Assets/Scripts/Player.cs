@@ -8,7 +8,9 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [Header("Powers")]
-    [SerializeField] private Shield shieldPrefab;
+    [SerializeField] private Shield shieldPrefab1;
+    [SerializeField] private Shield shieldPrefab2;
+
     [SerializeField] private InputAction shieldAction;
 
     [Header("Movement")] 
@@ -25,7 +27,15 @@ public class Player : MonoBehaviour
 
     
     private Animator _playerAnimator;
-    private Animator _shieldAnimator;
+    private Animator _shieldAnimator1;
+    private Animator _shieldAnimator2;
+    
+    private AudioPlayer _audioPlayer;
+
+
+    private bool _shieldSwitch;
+    private float _shieldOffAnimationTime;
+    private Shield _shieldToHide;
 
     private Vector2 _rawInput;
     private Vector2 _minBounds;
@@ -41,10 +51,15 @@ public class Player : MonoBehaviour
     {
         _shooter = GetComponent<Shooter>();
         _playerAnimator = GetComponent<Animator>();
-        _shieldAnimator = shieldPrefab.GetComponent<Animator>();
+        _shieldAnimator1 = shieldPrefab1.GetComponent<Animator>();
+        _shieldAnimator2 = shieldPrefab2.GetComponent<Animator>();
         
+        _audioPlayer = FindObjectOfType<AudioPlayer>();
+
         
         shieldAction = playerInput.actions["Shield"];
+        
+        //Callbacks
         shieldAction.performed += StartShield;
         shieldAction.canceled += StopShield;
     }
@@ -56,31 +71,73 @@ public class Player : MonoBehaviour
 
     void StartShield(InputAction.CallbackContext context)
     {
-        if (shieldPrefab.isActiveAndEnabled)
+        if (_shieldSwitch == false)
         {
-            shieldPrefab.gameObject.SetActive(false);
+            if (shieldPrefab1.isActiveAndEnabled)
+            {
+                shieldPrefab1.gameObject.SetActive(false);
+            }
+            _shieldAnimator1.StopPlayback();
+            shieldPrefab1.gameObject.SetActive(true);
+
+            _audioPlayer.PlayShieldClip();
+            
+            _shieldAnimator1.SetTrigger("ShieldOn");
+            _shieldAnimator1.SetBool("Shield",true);
         }
-        _shieldAnimator.StopPlayback();
-        shieldPrefab.gameObject.SetActive(true);
-        _shieldAnimator.SetTrigger("ShieldOn");
-        _shieldAnimator.SetBool("Shield",true);
+        else
+        {
+            if (shieldPrefab2.isActiveAndEnabled)
+            {
+                shieldPrefab2.gameObject.SetActive(false);
+            }
+            _shieldAnimator2.StopPlayback();
+            shieldPrefab2.gameObject.SetActive(true);
+
+            _audioPlayer.PlayShieldClip();
+            
+            
+            _shieldAnimator2.SetTrigger("ShieldOn");
+            _shieldAnimator2.SetBool("Shield",true);
+        }
     }
     
     void StopShield(InputAction.CallbackContext context)
     {
-        
-        _shieldAnimator.SetTrigger("ShieldOff");
-        _shieldAnimator.SetBool("Shield",false);
-        StartCoroutine(WaitAndHideShield());
-        
-        
+        if (_shieldSwitch  == false)
+        {
+            _shieldAnimator1.SetTrigger("ShieldOff");
+            _shieldAnimator1.SetBool("Shield",false);
+            StartCoroutine(WaitAndHideShield());
+            _shieldSwitch = true;
+
+        }
+        else
+        {
+            _shieldAnimator2.SetTrigger("ShieldOff");
+            _shieldAnimator2.SetBool("Shield",false);
+            StartCoroutine(WaitAndHideShield());
+            _shieldSwitch = false;
+        }
     }
     
     IEnumerator WaitAndHideShield()
     {
-        yield return new WaitForSeconds(_shieldAnimator.GetCurrentAnimatorStateInfo(0).length);
-        shieldPrefab.gameObject.SetActive(false);
+        if (_shieldSwitch  == false)
+        {
+            _shieldOffAnimationTime = _shieldAnimator1.GetCurrentAnimatorStateInfo(0).length;
+            _shieldToHide = shieldPrefab1;
+        }
+        else
+        {
+            _shieldOffAnimationTime = _shieldAnimator2.GetCurrentAnimatorStateInfo(0).length;
+            _shieldToHide = shieldPrefab2;
+        }
+        yield return new WaitForSeconds(_shieldOffAnimationTime);
+        _shieldToHide.gameObject.SetActive(false);
     }
+    
+
     
     private void Start()
     {

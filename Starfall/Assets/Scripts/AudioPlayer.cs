@@ -9,10 +9,15 @@ public class AudioPlayer : MonoBehaviour
     [Header("Shooting")] 
     [SerializeField] AudioClip greenLaserClip;
     [SerializeField] [Range(0f, 1f)] float greenLaserVolume = 1f;
-    
     [SerializeField] AudioClip redLaserClip;
     [SerializeField] [Range(0f, 1f)] float redLaserVolume = 1f;
 
+    [Header("Powers")] 
+    [SerializeField] AudioClip shieldClip;
+    [SerializeField] [Range(0f, 1f)] float shieldClipVolume = 1f;
+
+
+    
     [Header("Damage")] 
     [SerializeField] AudioClip playerDamageClip;
     [SerializeField] [Range(0f, 1f)] float playerDamageVolume = 1f;
@@ -54,6 +59,11 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
+    public void PlayShieldClip()
+    {
+        PlayClip(shieldClip, shieldClipVolume);
+    }
+    
     public void PlayGreenLaserClip()
     {
         PlayClip(greenLaserClip, greenLaserVolume);

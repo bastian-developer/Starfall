@@ -9,22 +9,26 @@ public class Shield : MonoBehaviour
 
     [SerializeField] private GameObject player;
     
-    public float rotationSpeed = 30f;
+    [SerializeField] public float rotationSpeed = 30f;
     public float followSpeed;
-    
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
             //Play Sound effect
+            //Turn Back Bullet?
         }
     }
 
     private void Awake()
     {
         transform.position = player.gameObject.transform.position;
+
     }
+
 
     private void Update()
     {
