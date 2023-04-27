@@ -9,8 +9,10 @@ public class Player : MonoBehaviour
 {
     [Header("Powers")]
     [SerializeField] private Shield shieldPrefab;
-    
-    [Header("Movement")]
+    [SerializeField] private InputAction shieldAction;
+
+    [Header("Movement")] 
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float moveSpeed = 12f;
     [SerializeField] private float rotationModifier;
     [SerializeField] private float rotationSpeed;
@@ -22,17 +24,29 @@ public class Player : MonoBehaviour
     [SerializeField] private float paddingBottom;
 
     
-    private Animator _animator;
+    private Animator _playerAnimator;
+    private Animator _shieldAnimator;
+
     private Vector2 _rawInput;
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
     private Shooter _shooter;
     
+    public float GetRotationSpeed()
+    {
+        return rotationSpeed;
+    }
 
     void Awake()
     {
         _shooter = GetComponent<Shooter>();
-        _animator = GetComponent<Animator>();
+        _playerAnimator = GetComponent<Animator>();
+        _shieldAnimator = shieldPrefab.GetComponent<Animator>();
+        
+        
+        shieldAction = playerInput.actions["Shield"];
+        shieldAction.performed += StartShield;
+        shieldAction.canceled += StopShield;
     }
     
     void Update()
@@ -40,6 +54,34 @@ public class Player : MonoBehaviour
         Move();
     }
 
+    void StartShield(InputAction.CallbackContext context)
+    {
+        if (shieldPrefab.isActiveAndEnabled)
+        {
+            shieldPrefab.gameObject.SetActive(false);
+        }
+        _shieldAnimator.StopPlayback();
+        shieldPrefab.gameObject.SetActive(true);
+        _shieldAnimator.SetTrigger("ShieldOn");
+        _shieldAnimator.SetBool("Shield",true);
+    }
+    
+    void StopShield(InputAction.CallbackContext context)
+    {
+        
+        _shieldAnimator.SetTrigger("ShieldOff");
+        _shieldAnimator.SetBool("Shield",false);
+        StartCoroutine(WaitAndHideShield());
+        
+        
+    }
+    
+    IEnumerator WaitAndHideShield()
+    {
+        yield return new WaitForSeconds(_shieldAnimator.GetCurrentAnimatorStateInfo(0).length);
+        shieldPrefab.gameObject.SetActive(false);
+    }
+    
     private void Start()
     {
         InitBounds();
@@ -65,13 +107,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnShield(InputValue value)
-    {
-        shieldPrefab.gameObject.SetActive(true);
-        
-    }
-
-
     void Move()
     {
         Vector2 delta = _rawInput * moveSpeed * Time.deltaTime;
@@ -93,41 +128,41 @@ public class Player : MonoBehaviour
     {
         if (_rawInput.x == -1)
         {
-            _animator.SetBool("Left", true);
-            _animator.SetBool("Right", false);
-            _animator.SetBool("Up", false);
-            _animator.SetBool("Down", false);
+            _playerAnimator.SetBool("Left", true);
+            _playerAnimator.SetBool("Right", false);
+            _playerAnimator.SetBool("Up", false);
+            _playerAnimator.SetBool("Down", false);
         }
         if (_rawInput.x == 1)
         {
-            _animator.SetBool("Right", true);
-            _animator.SetBool("Left", false);
-            _animator.SetBool("Up", false);
-            _animator.SetBool("Down", false);
+            _playerAnimator.SetBool("Right", true);
+            _playerAnimator.SetBool("Left", false);
+            _playerAnimator.SetBool("Up", false);
+            _playerAnimator.SetBool("Down", false);
         }
         if (_rawInput.y == -1)
         {
-            _animator.SetBool("Up", false);
-            _animator.SetBool("Down", true);
-            _animator.SetBool("Right", false);
-            _animator.SetBool("Left", false);
+            _playerAnimator.SetBool("Up", false);
+            _playerAnimator.SetBool("Down", true);
+            _playerAnimator.SetBool("Right", false);
+            _playerAnimator.SetBool("Left", false);
         }
         if (_rawInput.y == 1)
         {
-            _animator.SetBool("Up", true);
-            _animator.SetBool("Down", false);
-            _animator.SetBool("Right", false);
-            _animator.SetBool("Left", false);
+            _playerAnimator.SetBool("Up", true);
+            _playerAnimator.SetBool("Down", false);
+            _playerAnimator.SetBool("Right", false);
+            _playerAnimator.SetBool("Left", false);
         }
         if (_rawInput.x == 0)
         {
-            _animator.SetBool("Right", false);
-            _animator.SetBool("Left", false);
+            _playerAnimator.SetBool("Right", false);
+            _playerAnimator.SetBool("Left", false);
         }
         if (_rawInput.y == 0)
         {
-            _animator.SetBool("Up", false);
-            _animator.SetBool("Down", false);
+            _playerAnimator.SetBool("Up", false);
+            _playerAnimator.SetBool("Down", false);
         }
     }
 }
