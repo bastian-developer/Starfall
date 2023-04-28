@@ -25,6 +25,8 @@ public class Shooter : MonoBehaviour
 
     private Player _player;
 
+    private Energy _energy;
+
     public float GetProjectileSpeed()
     {
         return projectileSpeed;
@@ -39,6 +41,7 @@ public class Shooter : MonoBehaviour
     {
         _audioPlayer = FindObjectOfType<AudioPlayer>();
         _player = FindObjectOfType<Player>();
+        _energy = FindObjectOfType<Energy>();
     }
 
     
@@ -72,7 +75,6 @@ public class Shooter : MonoBehaviour
         }
         else if(!isFiring && _firingCoroutine != null)
         {
-            //StopAllCoroutines();
             StopCoroutine(_firingCoroutine);
             _firingCoroutine = null;
         }
@@ -99,27 +101,39 @@ public class Shooter : MonoBehaviour
                 Vector3 playerPosition = _player.transform.position;
                 Quaternion playerRotation = _player.transform.rotation;
 
-
-                if (useAI)
-                {
-                    instance = Instantiate(projectilePrefab, transform.position, Vector3ToQuaternion(playerPosition));
-                    _audioPlayer.PlayGreenLaserClip();;
-                }else
+                
+                if (!useAI && _energy.PayEnergyCost(2, "Shooting") )
                 {
                     //Get Mouse position to calculate bullet direction
                     //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                     instance = Instantiate(projectilePrefab, transform.position, playerRotation);
                     _audioPlayer.PlayRedLaserClip();
-                }
-                
-                Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+                    
+                    Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
             
-                if (rb != null)
+                    if (rb != null)
+                    {
+                        rb.velocity = transform.up * projectileSpeed;
+                    }
+                
+                    Destroy(instance, projectileLifetime);
+                }
+                else if(useAI)
                 {
-                    rb.velocity = transform.up * projectileSpeed;
+                    instance = Instantiate(projectilePrefab, transform.position, Vector3ToQuaternion(playerPosition));
+                    _audioPlayer.PlayGreenLaserClip();;
+                    
+                    Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+            
+                    if (rb != null)
+                    {
+                        rb.velocity = transform.up * projectileSpeed;
+                    }
+                
+                    Destroy(instance, projectileLifetime);
                 }
                 
-                Destroy(instance, projectileLifetime);
+                
             }
             
             

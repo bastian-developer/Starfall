@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(shieldPrefab1.GetEnergyConsumptionDelay());
-            playerEnergy.PayEnergyCost(shieldPrefab1.GetEnergyPerTime());
+            playerEnergy.PayEnergyCost(shieldPrefab1.GetEnergyPerTime(), "Shielding");
         }
     }
     
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
 
     void StartShield(InputAction.CallbackContext context)
     {
-        if (_shieldSwitch == false && _isShielded == false && playerEnergy.PayEnergyCost(shieldPrefab1.GetActivationCost()))
+        if (_shieldSwitch == false && _isShielded == false && playerEnergy.PayEnergyCost(shieldPrefab1.GetActivationCost(), "Shielding"))
         {
             if (shieldPrefab1.isActiveAndEnabled)
             {
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
             _shieldAnimator1.SetBool("Shield",true);
             _isShielded = true;
         }
-        else if (_shieldSwitch == true && _isShielded == false && playerEnergy.PayEnergyCost(shieldPrefab1.GetActivationCost()))
+        else if (_shieldSwitch == true && _isShielded == false && playerEnergy.PayEnergyCost(shieldPrefab1.GetActivationCost(), "Shielding"))
         {
             if (shieldPrefab2.isActiveAndEnabled)
             {

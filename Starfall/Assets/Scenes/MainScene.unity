@@ -1195,11 +1195,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6712577660846389367, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
       propertyPath: passiveRestorationDelay
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6712577660846389367, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
       propertyPath: passiveEnergyRestoration
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}

@@ -39,18 +39,21 @@ public class Energy : MonoBehaviour
         return maxEnergy;
     }
     
-    public bool PayEnergyCost(int energyCost)
+    public bool PayEnergyCost(int energyCost, String source)
     {
 
         if (currentEnergy <= energyCost)
         {
-            _player.StopShield();
+            if (source == "Shielding")
+            {
+                _player.StopShield();
+            }
             return false;
         }
         else
         {
             currentEnergy -= energyCost;
-            Debug.Log("Pay Energy" + currentEnergy);
+            Debug.Log("Paid" + currentEnergy + " on " + source);
             return true;
         }
     }
