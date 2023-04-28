@@ -104,7 +104,8 @@ MonoBehaviour:
   rotationSpeed: 60
   followSpeed: 500000
   activationCost: 15
-  energyPerSecond: 5
+  energyPerTime: 3
+  energyConsumptionDelay: 0.5
 --- !u!58 &6100108239881391288
 CircleCollider2D:
   m_ObjectHideFlags: 0

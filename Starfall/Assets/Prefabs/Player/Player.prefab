@@ -359,7 +359,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65486c479c52b7498d98df565ee23f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energy: 100
+  maxEnergy: 100
+  currentEnergy: 100
+  passiveEnergyRestoration: 1
+  passiveRestorationDelay: 0.5
 --- !u!1001 &9211407096681672520
 PrefabInstance:
   m_ObjectHideFlags: 0

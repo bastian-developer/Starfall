@@ -50,7 +50,9 @@ public class Player : MonoBehaviour
     private Vector2 _maxBounds;
     private Shooter _shooter;
     
-    private Coroutine _passiveEnergyCoroutine;
+    private Coroutine _restoreEnergyCoroutine;
+    private Coroutine _consumeEnergyCoroutine;
+
     
     public float GetRotationSpeed()
     {
@@ -74,7 +76,7 @@ public class Player : MonoBehaviour
         
         //Callbacks
         shieldAction.performed += StartShield;
-        shieldAction.canceled += StopShield;
+        shieldAction.canceled += StopShieldCallback;
     }
     
     void Update()
@@ -85,22 +87,38 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(WaitAndStopShieldSoundEffect());
         }
-
-
-        if (playerEnergy.ShouldRestoreEnergy() && _passiveEnergyCoroutine == null)
+        
+        if (playerEnergy.ShouldRestoreEnergy() && _restoreEnergyCoroutine == null)
         {
-            _passiveEnergyCoroutine = StartCoroutine(AddEnergyPerSecond());
+            _restoreEnergyCoroutine = StartCoroutine(AddEnergyPerTime());
         }
-        else if (!playerEnergy.ShouldRestoreEnergy() && _passiveEnergyCoroutine != null)
+        else if (!playerEnergy.ShouldRestoreEnergy() && _restoreEnergyCoroutine != null)
         {
-            StopCoroutine(_passiveEnergyCoroutine);
-            _passiveEnergyCoroutine = null;
+            StopCoroutine(_restoreEnergyCoroutine);
+            _restoreEnergyCoroutine = null;
         }
-
-        Debug.Log(playerEnergy.GetCurrentEnergy());
+        
+        if (_isShielded && _consumeEnergyCoroutine == null)
+        {
+            _consumeEnergyCoroutine = StartCoroutine(RemoveEnergyPerTimeShield());
+        }
+        else if (!_isShielded && _consumeEnergyCoroutine != null)
+        {
+            StopCoroutine(_consumeEnergyCoroutine);
+            _consumeEnergyCoroutine = null;
+        }
     }
     
-    IEnumerator AddEnergyPerSecond()
+    IEnumerator RemoveEnergyPerTimeShield()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(shieldPrefab1.GetEnergyConsumptionDelay());
+            playerEnergy.PayEnergyCost(shieldPrefab1.GetEnergyPerTime());
+        }
+    }
+    
+    IEnumerator AddEnergyPerTime()
     {
         while (true)
         {
@@ -149,8 +167,6 @@ public class Player : MonoBehaviour
     }
     IEnumerator WaitAndStopShieldSoundEffect()
     {
-        //_shieldAudioSource1.clip = shieldAudioSourceEnd;
-        //_shieldAudioSource1.Play();
         yield return new WaitForSeconds(_shieldAudioSource1.clip.length);
         StopShieldSoundEffect();
     }
@@ -164,7 +180,12 @@ public class Player : MonoBehaviour
     }
     
 
-    void StopShield(InputAction.CallbackContext context)
+    public void StopShieldCallback(InputAction.CallbackContext context)
+    {
+        StopShield();
+    }
+
+    public void StopShield()
     {
         if (_shieldSwitch  == false && _isShielded)
         {
@@ -176,6 +197,7 @@ public class Player : MonoBehaviour
             StartCoroutine(WaitAndHideShield());
             _shieldSwitch = true;
             _isShielded = false;
+            StopCoroutine(RemoveEnergyPerTimeShield());
         }
         else if (_shieldSwitch && _isShielded)
         {
@@ -187,9 +209,9 @@ public class Player : MonoBehaviour
             StartCoroutine(WaitAndHideShield());
             _shieldSwitch = false;
             _isShielded = false;
-        }
+            StopCoroutine(RemoveEnergyPerTimeShield());
+        }   
     }
-    
     IEnumerator WaitAndHideShield()
     {
         if (_shieldSwitch  == false)

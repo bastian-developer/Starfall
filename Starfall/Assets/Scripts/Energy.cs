@@ -10,30 +10,13 @@ public class Energy : MonoBehaviour
     [SerializeField] private int currentEnergy = 100;
     [SerializeField] private int passiveEnergyRestoration = 1;
     [SerializeField] private float passiveRestorationDelay = 1;
+    
+    private Player _player;
 
-
-    private void Start()
+    private void Awake()
     {
-        //StartCoroutine(AddEnergyPerSecond());
-    }
+        _player = FindObjectOfType<Player>();
 
-    private void Update()
-    {
-        if (currentEnergy >= maxEnergy)
-        {
-           // StopCoroutine(AddEnergyPerSecond());
-        }
-    }
-
-    IEnumerator AddEnergyPerSecond()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(passiveRestorationDelay);
-            currentEnergy += passiveEnergyRestoration;
-            Debug.Log(maxEnergy);
-            Debug.Log(currentEnergy);
-        }
     }
 
     public int GetPassiveEnergyRestoration()
@@ -61,11 +44,13 @@ public class Energy : MonoBehaviour
 
         if (currentEnergy <= energyCost)
         {
+            _player.StopShield();
             return false;
         }
         else
         {
             currentEnergy -= energyCost;
+            Debug.Log("Pay Energy" + currentEnergy);
             return true;
         }
     }
@@ -74,6 +59,8 @@ public class Energy : MonoBehaviour
     {
         
         currentEnergy += energyAmount;
+
+        Debug.Log("Add Energy" + currentEnergy);
 
     }
     

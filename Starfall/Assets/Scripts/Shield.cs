@@ -14,16 +14,23 @@ public class Shield : MonoBehaviour
     [SerializeField] public float followSpeed;
     [Header("Energy")]
     [SerializeField] public int activationCost = 15;
-    [SerializeField] public int energyPerSecond = 5;
+    [SerializeField] public int energyPerTime = 5;
+    [SerializeField] public float energyConsumptionDelay = 0.5f;
+
 
     public int GetActivationCost()
     {
         return activationCost;
     }
     
-    public int GetEnergyPerSecond()
+    public float GetEnergyConsumptionDelay()
     {
-        return energyPerSecond;
+        return energyConsumptionDelay;
+    }
+    
+    public int GetEnergyPerTime()
+    {
+        return energyPerTime;
     }
     
     private AudioPlayer _audioPlayer;
