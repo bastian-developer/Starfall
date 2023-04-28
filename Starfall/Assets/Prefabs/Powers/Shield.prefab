@@ -100,9 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  laserPrefab: {fileID: 7306692227792423664, guid: 2c49c2f39efbf0e43827e5dba3c4f663, type: 3}
+  laserPrefab: {fileID: 7306692227792423664, guid: fea9d4d105e5273459c7168699478bd4, type: 3}
   rotationSpeed: 60
   followSpeed: 500000
+  activationCost: 15
+  energyPerSecond: 5
 --- !u!58 &6100108239881391288
 CircleCollider2D:
   m_ObjectHideFlags: 0

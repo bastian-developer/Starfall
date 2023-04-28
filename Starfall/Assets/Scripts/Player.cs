@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip shieldAudioSourceStart;
     [SerializeField] AudioClip shieldAudioSourceEnd;
 
-
+    private Energy playerEnergy;
 
     private bool _shieldSwitch;
     private bool _isShielded;
@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
     private Shooter _shooter;
+    
+    private Coroutine _passiveEnergyCoroutine;
     
     public float GetRotationSpeed()
     {
@@ -67,6 +69,8 @@ public class Player : MonoBehaviour
         _shieldAudioSource2 = GetComponent<AudioSource>();
         
         shieldAction = playerInput.actions["Shield"];
+
+        playerEnergy = GetComponent<Energy>();
         
         //Callbacks
         shieldAction.performed += StartShield;
@@ -81,11 +85,33 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(WaitAndStopShieldSoundEffect());
         }
+
+
+        if (playerEnergy.ShouldRestoreEnergy() && _passiveEnergyCoroutine == null)
+        {
+            _passiveEnergyCoroutine = StartCoroutine(AddEnergyPerSecond());
+        }
+        else if (!playerEnergy.ShouldRestoreEnergy() && _passiveEnergyCoroutine != null)
+        {
+            StopCoroutine(_passiveEnergyCoroutine);
+            _passiveEnergyCoroutine = null;
+        }
+
+        Debug.Log(playerEnergy.GetCurrentEnergy());
+    }
+    
+    IEnumerator AddEnergyPerSecond()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(playerEnergy.GetPassiveRestorationDelay());
+            playerEnergy.AddEnergy(playerEnergy.GetPassiveEnergyRestoration());
+        }
     }
 
     void StartShield(InputAction.CallbackContext context)
     {
-        if (_shieldSwitch == false && _isShielded == false)
+        if (_shieldSwitch == false && _isShielded == false && playerEnergy.PayEnergyCost(shieldPrefab1.GetActivationCost()))
         {
             if (shieldPrefab1.isActiveAndEnabled)
             {
@@ -99,7 +125,7 @@ public class Player : MonoBehaviour
             _shieldAnimator1.SetBool("Shield",true);
             _isShielded = true;
         }
-        else if (_shieldSwitch == true && _isShielded == false)
+        else if (_shieldSwitch == true && _isShielded == false && playerEnergy.PayEnergyCost(shieldPrefab1.GetActivationCost()))
         {
             if (shieldPrefab2.isActiveAndEnabled)
             {
@@ -142,7 +168,6 @@ public class Player : MonoBehaviour
     {
         if (_shieldSwitch  == false && _isShielded)
         {
-            Debug.Log("if stop playing");
             StopShieldSoundEffect();
             _shieldAudioSource1.clip = shieldAudioSourceEnd;
             _shieldAudioSource1.Play();
@@ -154,7 +179,6 @@ public class Player : MonoBehaviour
         }
         else if (_shieldSwitch && _isShielded)
         {
-            Debug.Log("else end playing");
             StopShieldSoundEffect();
             _shieldAudioSource1.clip = shieldAudioSourceEnd;
             _shieldAudioSource1.Play();
