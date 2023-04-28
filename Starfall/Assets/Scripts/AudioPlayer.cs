@@ -33,13 +33,13 @@ public class AudioPlayer : MonoBehaviour
     
     
     private static AudioPlayer _audioInstance;
-    
 
+    
     public AudioPlayer GetInstance()
     {
         return _audioInstance;
     }
-    
+
     private void Awake()
     {
         ManageSingleton();

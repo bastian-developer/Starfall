@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     private Animator _shieldAnimator2;
     
     private AudioPlayer _audioPlayer;
+    private AudioSource _shieldAudioSource;
 
 
     private bool _shieldSwitch;
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
         _shieldAnimator2 = shieldPrefab2.GetComponent<Animator>();
         
         _audioPlayer = FindObjectOfType<AudioPlayer>();
+        _shieldAudioSource = GetComponent<AudioSource>();
 
         
         shieldAction = playerInput.actions["Shield"];
@@ -67,6 +69,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+        
+        //if pressed key
+        //loop audio
+
+        //while (shieldPrefab1 || shieldPrefab2)
+        //{
+            //_shieldAudioSource.time = 1;
+            //_shieldAudioSource.PlayScheduled(AudioSettings.dspTime);
+            //_shieldAudioSource.SetScheduledEndTime(AudioSettings.dspTime + 1);
+            
+          //  Debug.Log("xd");
+        //}
     }
 
     void StartShield(InputAction.CallbackContext context)
@@ -79,13 +93,15 @@ public class Player : MonoBehaviour
             }
             _shieldAnimator1.StopPlayback();
             shieldPrefab1.gameObject.SetActive(true);
+            
+            _shieldAudioSource.time = 0f;
+            _shieldAudioSource.Play();
 
-            _audioPlayer.PlayShieldClip();
             
             _shieldAnimator1.SetTrigger("ShieldOn");
             _shieldAnimator1.SetBool("Shield",true);
         }
-        else
+        else if (_shieldSwitch == true)
         {
             if (shieldPrefab2.isActiveAndEnabled)
             {
@@ -93,27 +109,44 @@ public class Player : MonoBehaviour
             }
             _shieldAnimator2.StopPlayback();
             shieldPrefab2.gameObject.SetActive(true);
+            _shieldAudioSource.time = 0f;
 
-            _audioPlayer.PlayShieldClip();
+            _shieldAudioSource.Play();
             
+
             
             _shieldAnimator2.SetTrigger("ShieldOn");
             _shieldAnimator2.SetBool("Shield",true);
         }
     }
-    
+
+
+
+
     void StopShield(InputAction.CallbackContext context)
     {
         if (_shieldSwitch  == false)
         {
+            _shieldAudioSource.Stop();
+            _shieldAudioSource.time = 0.1f;
+            _shieldAudioSource.Play();
+
+            
+            
             _shieldAnimator1.SetTrigger("ShieldOff");
             _shieldAnimator1.SetBool("Shield",false);
             StartCoroutine(WaitAndHideShield());
             _shieldSwitch = true;
 
         }
-        else
+        else if (_shieldSwitch == true)
         {
+            _shieldAudioSource.Stop();
+
+            _shieldAudioSource.time = 0.1f;
+            _shieldAudioSource.Play();
+
+
             _shieldAnimator2.SetTrigger("ShieldOff");
             _shieldAnimator2.SetBool("Shield",false);
             StartCoroutine(WaitAndHideShield());
