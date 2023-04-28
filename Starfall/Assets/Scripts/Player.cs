@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         
         if (!_isShielded && _shieldAudioSource2.isPlaying)
         {
-            StartCoroutine(WaitAndStopShield());
+            StartCoroutine(WaitAndStopShieldSoundEffect());
         }
     }
 
@@ -121,10 +121,10 @@ public class Player : MonoBehaviour
         _shieldAudioSource2.Stop();
         StopCoroutine(WaitAndSoundShield());
     }
-    IEnumerator WaitAndStopShield()
+    IEnumerator WaitAndStopShieldSoundEffect()
     {
-        _shieldAudioSource1.clip = shieldAudioSourceEnd;
-        _shieldAudioSource1.Play();
+        //_shieldAudioSource1.clip = shieldAudioSourceEnd;
+        //_shieldAudioSource1.Play();
         yield return new WaitForSeconds(_shieldAudioSource1.clip.length);
         StopShieldSoundEffect();
     }

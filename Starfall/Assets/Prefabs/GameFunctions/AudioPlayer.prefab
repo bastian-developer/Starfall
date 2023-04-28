@@ -49,7 +49,7 @@ MonoBehaviour:
   greenLaserVolume: 0.15
   redLaserClip: {fileID: 8300000, guid: ea2d20c51ccc7c44aaa30aa946870de5, type: 3}
   redLaserVolume: 0.4
-  shieldClip: {fileID: 8300000, guid: e15019eb69cf1c14ca7b2d98659f1098, type: 3}
+  shieldClip: {fileID: 8300000, guid: 6c9ed84229d203240b6b7b18674deecc, type: 3}
   shieldClipVolume: 1
   playerDamageClip: {fileID: 8300000, guid: 9a6a53d1fedc2434aa5df08e70ec053f, type: 3}
   playerDamageVolume: 0.412

@@ -8,17 +8,37 @@ public class Shield : MonoBehaviour
 {
 
     [SerializeField] private GameObject player;
-    
-    [SerializeField] public float rotationSpeed = 30f;
-    public float followSpeed;
+    [SerializeField] public GameObject laserPrefab;
 
+    [SerializeField] public float rotationSpeed = 30f;
+    [SerializeField] public float followSpeed;
+
+    private AudioPlayer _audioPlayer;
+    Quaternion playerRotation;
+
+    GameObject instance;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Laser")
         {
+            _audioPlayer.PlayShieldClip();
             Destroy(other.gameObject);
-            //Play Sound effect
+
+            
+            playerRotation = player.transform.rotation;
+            instance = Instantiate(laserPrefab, transform.position, playerRotation);
+            
+            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+            
+            if (rb != null)
+            {
+                rb.velocity = player.transform.up * player.GetComponent<Shooter>().GetProjectileSpeed();
+            }
+                
+            Destroy(instance, player.GetComponent<Shooter>().GetProjectileLifetime());
+
+            //Play animation effect
             //Turn Back Bullet?
         }
     }
@@ -26,6 +46,8 @@ public class Shield : MonoBehaviour
     private void Awake()
     {
         transform.position = player.gameObject.transform.position;
+        
+        _audioPlayer = FindObjectOfType<AudioPlayer>();
 
     }
 

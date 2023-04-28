@@ -25,6 +25,16 @@ public class Shooter : MonoBehaviour
 
     private Player _player;
 
+    public float GetProjectileSpeed()
+    {
+        return projectileSpeed;
+    }
+    
+    public float GetProjectileLifetime()
+    {
+        return projectileSpeed;
+    }
+    
     void Awake()
     {
         _audioPlayer = FindObjectOfType<AudioPlayer>();
