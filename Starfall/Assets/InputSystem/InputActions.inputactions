@@ -267,7 +267,7 @@
                     "name": "",
                     "id": "9b57e549-8f5f-4fda-bc3e-f67eb4ee1857",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Hold(pressPoint=0.0001)",
                     "processors": "",
                     "groups": "",
                     "action": "Shield",
