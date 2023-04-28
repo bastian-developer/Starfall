@@ -30,14 +30,14 @@ public class UIDisplay : MonoBehaviour
 
     void Start()
     {
-        healthSlider.maxValue = _playerHealth.GetHealth();
+        healthSlider.maxValue = _playerHealth.GetCurrentHealth();
         energySlider.maxValue = _playerEnergy.GetCurrentEnergy();
 
     }
 
     void Update()
     {
-        healthSlider.value = _playerHealth.GetHealth();
+        healthSlider.value = _playerHealth.GetCurrentHealth();
         energySlider.value = _playerEnergy.GetCurrentEnergy();
         scoreText.text = _scoreKeeper.GetScore().ToString("000000000");
     }

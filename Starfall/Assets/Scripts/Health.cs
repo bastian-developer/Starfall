@@ -7,11 +7,16 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private bool isPlayer;
     [SerializeField] private int score;
-    [SerializeField] private int health = 100;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int passiveHealthRestoration = 1;
+    [SerializeField] private float passiveHealthRestorationDelay = 1;
+    
     [SerializeField] private ParticleSystem hitEffect;
 
     [SerializeField] private bool applyCameraShake;
-    
+
+    private int _currentHealth;
+
     private CameraShake _cameraShake;
     
     private AudioPlayer _audioPlayer;
@@ -21,10 +26,13 @@ public class Health : MonoBehaviour
     private LevelManager _levelManager;
     
     private Animator _animator;
+    
+    private Coroutine _restoreHealthCoroutine;
 
-    public int GetHealth()
+
+    public int GetCurrentHealth()
     {
-        return health;
+        return _currentHealth;
     }
     
     private void Awake()
@@ -34,8 +42,48 @@ public class Health : MonoBehaviour
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         _levelManager = FindObjectOfType<LevelManager>();
         _animator = FindObjectOfType<Animator>();
+        _currentHealth = maxHealth;
     }
 
+    public bool _shouldRestoreHealth()
+    {
+        if (_currentHealth < maxHealth)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void Update()
+    {
+        if (isPlayer && _shouldRestoreHealth() && _restoreHealthCoroutine == null)
+        {
+            _restoreHealthCoroutine = StartCoroutine(AddHealthOverTime());
+            
+        }else if (isPlayer && !_shouldRestoreHealth() && _restoreHealthCoroutine != null)
+        {
+            StopCoroutine(_restoreHealthCoroutine);
+            _restoreHealthCoroutine = null;
+        }
+    }
+
+    IEnumerator AddHealthOverTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(passiveHealthRestorationDelay);
+            _currentHealth += passiveHealthRestoration;
+            
+            Debug.Log("Passive Health " + passiveHealthRestoration);
+            Debug.Log("Current Health " + _currentHealth);
+
+
+        }
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
@@ -64,8 +112,8 @@ public class Health : MonoBehaviour
     }
     void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        _currentHealth -= damage;
+        if (_currentHealth <= 0)
         {
             Die();
         }

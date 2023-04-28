@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         
         if (playerEnergy.ShouldRestoreEnergy() && _restoreEnergyCoroutine == null)
         {
-            _restoreEnergyCoroutine = StartCoroutine(AddEnergyPerTime());
+            _restoreEnergyCoroutine = StartCoroutine(AddEnergyOverTime());
         }
         else if (!playerEnergy.ShouldRestoreEnergy() && _restoreEnergyCoroutine != null)
         {
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         
         if (_isShielded && _consumeEnergyCoroutine == null)
         {
-            _consumeEnergyCoroutine = StartCoroutine(RemoveEnergyPerTimeShield());
+            _consumeEnergyCoroutine = StartCoroutine(RemoveEnergyOverTimeShield());
         }
         else if (!_isShielded && _consumeEnergyCoroutine != null)
         {
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    IEnumerator RemoveEnergyPerTimeShield()
+    IEnumerator RemoveEnergyOverTimeShield()
     {
         while (true)
         {
@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    IEnumerator AddEnergyPerTime()
+    IEnumerator AddEnergyOverTime()
     {
         while (true)
         {
@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
             StartCoroutine(WaitAndHideShield());
             _shieldSwitch = true;
             _isShielded = false;
-            StopCoroutine(RemoveEnergyPerTimeShield());
+            StopCoroutine(RemoveEnergyOverTimeShield());
         }
         else if (_shieldSwitch && _isShielded)
         {
@@ -209,7 +209,7 @@ public class Player : MonoBehaviour
             StartCoroutine(WaitAndHideShield());
             _shieldSwitch = false;
             _isShielded = false;
-            StopCoroutine(RemoveEnergyPerTimeShield());
+            StopCoroutine(RemoveEnergyOverTimeShield());
         }   
     }
     IEnumerator WaitAndHideShield()

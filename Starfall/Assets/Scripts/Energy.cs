@@ -7,15 +7,16 @@ using UnityEngine;
 public class Energy : MonoBehaviour
 {
     [SerializeField] private int maxEnergy = 100;
-    [SerializeField] private int currentEnergy = 100;
+    private int _currentEnergy;
     [SerializeField] private int passiveEnergyRestoration = 1;
-    [SerializeField] private float passiveRestorationDelay = 1;
+    [SerializeField] private float passiveEnergyRestorationDelay = 1;
     
     private Player _player;
 
     private void Awake()
     {
         _player = FindObjectOfType<Player>();
+        _currentEnergy = maxEnergy;
 
     }
 
@@ -26,12 +27,12 @@ public class Energy : MonoBehaviour
     
     public float GetPassiveRestorationDelay()
     {
-        return passiveRestorationDelay;
+        return passiveEnergyRestorationDelay;
     }
     
     public int GetCurrentEnergy()
     {
-        return currentEnergy;
+        return _currentEnergy;
     }
     
     public int GetMaxEnergy()
@@ -42,7 +43,7 @@ public class Energy : MonoBehaviour
     public bool PayEnergyCost(int energyCost, String source)
     {
 
-        if (currentEnergy <= energyCost)
+        if (_currentEnergy <= energyCost)
         {
             if (source == "Shielding")
             {
@@ -52,8 +53,10 @@ public class Energy : MonoBehaviour
         }
         else
         {
-            currentEnergy -= energyCost;
-            Debug.Log("Paid" + currentEnergy + " on " + source);
+            _currentEnergy -= energyCost;
+            Debug.Log("Paid" + energyCost + " on " + source);
+            Debug.Log("Total reamining energy " + _currentEnergy);
+
             return true;
         }
     }
@@ -61,16 +64,16 @@ public class Energy : MonoBehaviour
     public void AddEnergy(int energyAmount)
     {
         
-        currentEnergy += energyAmount;
+        _currentEnergy += energyAmount;
 
-        Debug.Log("Add Energy" + currentEnergy);
+        Debug.Log("Add Energy " + energyAmount);
 
     }
     
     public bool ShouldRestoreEnergy()
     {
 
-        if (currentEnergy < maxEnergy)
+        if (_currentEnergy < maxEnergy)
         {
             return true;
         }

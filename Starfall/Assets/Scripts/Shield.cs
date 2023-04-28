@@ -40,7 +40,7 @@ public class Shield : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Laser")
+        if (other.tag == "Laser" && player)
         {
             _audioPlayer.PlayShieldClip();
             Destroy(other.gameObject);

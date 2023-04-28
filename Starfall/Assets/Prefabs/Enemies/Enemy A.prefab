@@ -105,7 +105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   score: 60
-  health: 30
+  maxHealth: 60
+  passiveHealthRestoration: 1
+  passiveHealthRestorationDelay: 1
   hitEffect: {fileID: 3420023136322087538, guid: 898eda81e063b6d44928f0a468535e4a, type: 3}
   applyCameraShake: 0
 --- !u!114 &1629074917635414513
