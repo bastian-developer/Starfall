@@ -81,8 +81,17 @@ namespace Powers
             // Play a hit effect and shake the camera
             PlayHitEffect();
             ShakeCamera();
+            
+            
             // Notify the DamageDealer that it has hit something
-            damageDealer.Hit();
+            if (isPlayer)
+            {
+                damageDealer.GetDamage();
+            }
+            else
+            {
+                damageDealer.Hit();
+            }
         }
 
 
@@ -103,6 +112,8 @@ namespace Powers
             {
                 Die();
             }
+            
+            Debug.Log(damage + " " + _currentHealth);
         }
 
         // A method that handles death

@@ -1,7 +1,0 @@
-
-ocsharpsquid:S3776^"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÀçÈ
-Hcsharpsquid:S3903"&Move 'Shooter' into a named namespace.(Õœ›Ôùÿÿÿÿ
->csharpsquid:S1116}"Remove this empty statement.(åÓ‘‰ùÿÿÿÿ
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ÊÌçö
-Ocsharpsquid:S2190^"2Add a way to break out of this method's recursion.(ÀçÈ
-<csharpsquid:S125”"Remove this commented out code.(öäê¶
