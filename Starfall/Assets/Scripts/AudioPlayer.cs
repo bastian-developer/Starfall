@@ -16,7 +16,11 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip shieldClip;
     [SerializeField] [Range(0f, 1f)] float shieldClipVolume = 1f;
 
-
+    [Header("Items")] 
+    [SerializeField] AudioClip energyBatteryClip;
+    [SerializeField] [Range(0f, 1f)] float energyBatteryVolume = 1f;
+    [SerializeField] AudioClip lifeBatteryClip;
+    [SerializeField] [Range(0f, 1f)] float lifeBatteryVolume = 1f;
     
     [Header("Damage")] 
     [SerializeField] AudioClip playerDamageClip;
@@ -59,6 +63,16 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
+    public void PlayEnergyBatteryClip()
+    {
+        PlayClip(energyBatteryClip, energyBatteryVolume);
+    }
+
+    public void PlayLifeBatteryClip()
+    {
+        PlayClip(lifeBatteryClip, lifeBatteryVolume);
+    }
+    
     public void PlayShieldClip()
     {
         PlayClip(shieldClip, shieldClipVolume);

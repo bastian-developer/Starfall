@@ -4834,7 +4834,7 @@ GameObject:
   - component: {fileID: 8341319436927852832}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4953,10 +4953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d62faa4d602288c40bb90f1073b0f1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldManager: {fileID: 0}
   playerInput: {fileID: 8251342449818445625}
   moveSpeed: 1
-  rotationModifier: 90
   rotationSpeed: 3
   paddingLeft: 0.15
   paddingRight: 0.15

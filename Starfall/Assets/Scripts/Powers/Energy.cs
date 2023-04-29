@@ -53,7 +53,7 @@ namespace Powers
         }
         
         // Function that add the amount of energy passed to
-        private void AddEnergy(int energyAmount)
+        public void AddEnergy(int energyAmount)
         {
             _currentEnergy += energyAmount;
         }
