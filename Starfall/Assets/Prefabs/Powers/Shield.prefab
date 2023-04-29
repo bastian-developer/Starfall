@@ -103,8 +103,8 @@ MonoBehaviour:
   laserPrefab: {fileID: 7306692227792423664, guid: fea9d4d105e5273459c7168699478bd4, type: 3}
   rotationSpeed: 60
   followSpeed: 500000
-  activationCost: 10
-  energyPerTime: 4
+  energyActivationCost: 10
+  energyCostOverTime: 4
   energyConsumptionDelay: 0.5
 --- !u!58 &6100108239881391288
 CircleCollider2D:

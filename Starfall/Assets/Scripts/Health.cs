@@ -24,9 +24,7 @@ public class Health : MonoBehaviour
     private ScoreKeeper _scoreKeeper;
 
     private LevelManager _levelManager;
-    
-    private Animator _animator;
-    
+
     private Coroutine _restoreHealthCoroutine;
 
 
@@ -41,7 +39,6 @@ public class Health : MonoBehaviour
         _audioPlayer = FindObjectOfType<AudioPlayer>();
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         _levelManager = FindObjectOfType<LevelManager>();
-        _animator = FindObjectOfType<Animator>();
         _currentHealth = maxHealth;
     }
 
@@ -76,11 +73,8 @@ public class Health : MonoBehaviour
         {
             yield return new WaitForSeconds(passiveHealthRestorationDelay);
             _currentHealth += passiveHealthRestoration;
-            
-            Debug.Log("Passive Health " + passiveHealthRestoration);
-            Debug.Log("Current Health " + _currentHealth);
-
-
+            //Debug.Log("Passive Health " + passiveHealthRestoration);
+            //Debug.Log("Current Health " + _currentHealth);
         }
     }
     
@@ -93,12 +87,6 @@ public class Health : MonoBehaviour
             TakeDamage(damageDealer.GetDamage());
             PlayHitEffect();
             ShakeCamera();
-
-            if (isPlayer)
-            {
-                _animator.SetTrigger("Hit");
-            }
-            
             damageDealer.Hit();
         }
     }

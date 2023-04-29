@@ -1,78 +1,70 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+// This class represents a shield that can protect the player from enemy projectiles.
 public class Shield : MonoBehaviour
 {
-    [Header("Setup")]
-    [SerializeField] public GameObject player;
-    [SerializeField] public GameObject laserPrefab;
-    [Header("Movement")]
-    [SerializeField] public float rotationSpeed = 30f;
-    [SerializeField] public float followSpeed;
+    // The player and laser prefab to be used.
+    [Header("Setup")] 
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject laserPrefab;
+
+    // The speed at which the shield rotates and follows the player.
+    [Header("Movement")] 
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float followSpeed;
+
+    // The energy required to activate the shield, the energy cost per second, and the delay between energy consumption.
     [Header("Energy")]
-    [SerializeField] public int activationCost = 15;
-    [SerializeField] public int energyPerTime = 5;
-    [SerializeField] public float energyConsumptionDelay = 0.5f;
+    [SerializeField] private int energyActivationCost;
+    [SerializeField] private int energyCostOverTime;
+    [SerializeField] private float energyConsumptionDelay;
 
-
-    public int GetActivationCost()
-    {
-        return activationCost;
-    }
-    
-    public float GetEnergyConsumptionDelay()
-    {
-        return energyConsumptionDelay;
-    }
-    
-    public int GetEnergyPerTime()
-    {
-        return energyPerTime;
-    }
-    
     private AudioPlayer _audioPlayer;
-    Quaternion playerRotation;
+    private Rigidbody2D _laserRigidBody;
 
-    GameObject instance;
+    private float _projectileSpeed;
+    private float _projectileLifetime;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Laser" && player)
-        {
-            _audioPlayer.PlayShieldClip();
-            Destroy(other.gameObject);
-            playerRotation = player.transform.rotation;
-            instance = Instantiate(laserPrefab, transform.position, playerRotation);
-            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
-            
-            if (rb != null)
-            {
-                rb.velocity = player.transform.up * player.GetComponent<Shooter>().GetProjectileSpeed();
-            }
-            Destroy(instance, player.GetComponent<Shooter>().GetProjectileLifetime());
+    // The rotation of the player.
+    private Quaternion PlayerRotation => player.transform.rotation;
 
-        }
-    }
+    // Properties to access the energy activation cost, energy consumption delay, and energy cost per second.
+    public int EnergyActivationCost => energyActivationCost;
+    public float EnergyConsumptionDelay => energyConsumptionDelay;
+    public int EnergyCostOverTime => energyCostOverTime;
 
     private void Awake()
     {
+        // Set the initial position of the shield to be the same as the player.
         transform.position = player.gameObject.transform.position;
-        
+
+        // Find the AudioPlayer component in the scene.
         _audioPlayer = FindObjectOfType<AudioPlayer>();
-
     }
-
 
     private void Update()
     {
-        if (player)
-        {
-           transform.position = Vector3.MoveTowards(transform.position, player.transform.position, followSpeed);
-           transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
-        }
+        // Move the shield towards the player and rotate it.
+        if (!player) return;
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, followSpeed);
+        transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // If the shield collides with a laser and the player is present,
+        // destroy the laser and spawn a new laser instance.
+        if (!other.CompareTag("Laser") || !player) return;
+        _audioPlayer.PlayShieldClip();
+        Destroy(other.gameObject);
+        var laserInstance = Instantiate(laserPrefab, transform.position, PlayerRotation);
+
+        // Set the velocity of the laser instance to the speed of the player's
+        // projectiles and destroy it after a set lifetime.
+        if (!laserInstance.TryGetComponent(out _laserRigidBody)) return;
+        _projectileSpeed = player.GetComponent<Shooter>().GetProjectileSpeed();
+        _laserRigidBody.velocity = player.transform.up * _projectileSpeed;
+        _projectileLifetime = player.GetComponent<Shooter>().GetProjectileLifetime();
+        Destroy(laserInstance, _projectileLifetime);
+    }
 }
