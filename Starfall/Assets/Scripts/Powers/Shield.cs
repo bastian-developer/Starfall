@@ -42,7 +42,7 @@ namespace Powers
             // Find the AudioPlayer component in the scene.
             _audioPlayer = FindObjectOfType<AudioPlayer>();
             
-            //Find Energy component to pay energy.
+            // Find Energy component to pay energy.
             _playerEnergy = FindObjectOfType<Energy>();
         }
 
@@ -53,7 +53,7 @@ namespace Powers
 
         private void FollowPlayer()
         {
-            //Move the shield towards the player and rotate it.
+            // Move the shield towards the player and rotate it.
             if (!player) return;
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, followSpeed);
             transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
@@ -79,7 +79,7 @@ namespace Powers
             }
         }
         
-        //Verifies if the player should consume energy in shielding actions
+        // Verifies if the player should consume energy in shielding actions
         public void ManageEnergyConsumption(bool isShielded)
         {
             switch (isShielded)
@@ -94,7 +94,7 @@ namespace Powers
             }
         }
 
-        //Calls energy class to reduce current energy quantity
+        // Calls energy class to reduce current energy quantity
         private IEnumerator RemoveEnergyOverTimeShield(bool isShielded)
         {
             while (isShielded)

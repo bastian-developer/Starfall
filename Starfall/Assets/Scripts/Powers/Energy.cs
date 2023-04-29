@@ -4,7 +4,7 @@ using Characters;
 
 namespace Powers
 {
-    //This class is in charge of managing the energy of the player
+    // This class is in charge of managing the energy of the player
     public class Energy : MonoBehaviour
     {
         [Header("Setup")]
@@ -30,15 +30,15 @@ namespace Powers
             ManageEnergyRestoration();
         }
         
-        //This function is called when some source needs energy to be activated
-        //It returns true if the energy cost can be paid, if not, will return false
+        // This function is called when some source needs energy to be activated
+        // It returns true if the energy cost can be paid, if not, will return false
         public bool PayEnergyCost(int energyCost, string source)
         {
             if (_currentEnergy <= energyCost)
             {
-                //Check if the source of energy consumption is the shield
-                //If the shield asks for energy to be active and the player
-                //Runs out of of this resource, the shields will be deactivated
+                // Check if the source of energy consumption is the shield
+                // If the shield asks for energy to be active and the player
+                // Runs out of of this resource, the shields will be deactivated
                 if (source == "Shielding")
                 {
                     _shieldManager.StopShield();
@@ -52,21 +52,21 @@ namespace Powers
             }
         }
         
-        //Function that add the amount of energy passed to
+        // Function that add the amount of energy passed to
         private void AddEnergy(int energyAmount)
         {
             _currentEnergy += energyAmount;
         }
         
-        //This function validates if the energy bar of the player is at his maximum
-        //Preventing to stacking an infinite amount of energy.
+        // This function validates if the energy bar of the player is at his maximum
+        // Preventing to stacking an infinite amount of energy.
         private bool ShouldRestoreEnergy()
         {
             return _currentEnergy < maxEnergy;
         }
         
-        //This function is responsible for activating or deactivating energy regeneration
-        //Based on the amount and rate of energy regeneration sent as parameters
+        // This function is responsible for activating or deactivating energy regeneration
+        // Based on the amount and rate of energy regeneration sent as parameters
         private void ManageEnergyRestoration()
         {
             if (ShouldRestoreEnergy() && _restoreEnergyCoroutine == null)

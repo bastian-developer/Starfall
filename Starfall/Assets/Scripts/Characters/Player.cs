@@ -59,14 +59,14 @@ namespace Characters
             InitBounds();
         }
 
-        //Initialize bounds that prevent player from reaching borders of the screen
+        // Initialize bounds that prevent player from reaching borders of the screen
         private void InitBounds()
         {
             _minBounds = _mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
             _maxBounds = _mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
         }
         
-        //Get player movement
+        // Get player movement
         private void OnMove(InputValue value)
         {
             _rawInput = value.Get<Vector2>();
@@ -77,19 +77,19 @@ namespace Characters
             _shooter.isFiring = value.isPressed;
         }
 
-        //Called when player presses space, ask to shield manager to activate one of the shields
+        // Called when player presses space, ask to shield manager to activate one of the shields
         private void StartShieldCallback(InputAction.CallbackContext context)
         {
             _shieldManager.StartShield();
         }
 
-        //Called when player releases space, ask to shield manager to disable current shield
+        // Called when player releases space, ask to shield manager to disable current shield
         private void StopShieldCallback(InputAction.CallbackContext context)
         {
             _shieldManager.StopShield();
         }
 
-        //Transform player character position to player input
+        // Transform player character position to player input
         private void Move()
         {
             var delta = _rawInput * (moveSpeed * Time.deltaTime);
@@ -104,7 +104,7 @@ namespace Characters
             transform.position = position;
         }
 
-        //Get mouse position, calculate angle and rotate player sprite to fire accordingly
+        // Get mouse position, calculate angle and rotate player sprite to fire accordingly
         private void RotateTowardsMousePosition()
         {
             var mousePosition = _mainCamera.ScreenToWorldPoint(_mouse.position.ReadValue());
