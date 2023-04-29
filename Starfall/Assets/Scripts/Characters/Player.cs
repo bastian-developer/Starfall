@@ -6,8 +6,6 @@ namespace Characters
 {
     public class Player : MonoBehaviour
     {
-
-
         [Header("Movement")] 
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private float moveSpeed;
@@ -29,7 +27,6 @@ namespace Characters
 
         private ShieldManager _shieldManager;
 
-        
         public float RotationSpeed
         {
             get => rotationSpeed;
@@ -63,19 +60,19 @@ namespace Characters
         }
 
         //Initialize bounds that prevent player from reaching borders of the screen
-        void InitBounds()
+        private void InitBounds()
         {
             _minBounds = _mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
             _maxBounds = _mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
         }
         
         //Get player movement
-        void OnMove(InputValue value)
+        private void OnMove(InputValue value)
         {
             _rawInput = value.Get<Vector2>();
         }
 
-        void OnFire(InputValue value)
+        private void OnFire(InputValue value)
         {
             _shooter.isFiring = value.isPressed;
         }
@@ -95,7 +92,7 @@ namespace Characters
         //Transform player character position to player input
         private void Move()
         {
-            var delta = _rawInput * moveSpeed * Time.deltaTime;
+            var delta = _rawInput * (moveSpeed * Time.deltaTime);
             _playerAnimator.AnimatePlayer(_rawInput);
             var position = transform.position;
             var newPosition = new Vector2

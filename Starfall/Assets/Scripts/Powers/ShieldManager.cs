@@ -5,8 +5,8 @@ namespace Powers
 {
     //This class is meant to turn on and of two different Shield instances by switching them
     //It is also responsible for the sound effect that is divided in 3 sections
-    //The start and end sections are added as clips and the middle section
-    //Was added as an AudioSource to set it looped when player holds the Shield button
+    //The start and end sections are added as clips
+    //The middle section was added as an AudioSource to set it looped when player is shielded
     public class ShieldManager : MonoBehaviour
     {
         [Header("Setup")] 
