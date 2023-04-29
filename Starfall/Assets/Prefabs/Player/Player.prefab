@@ -4831,6 +4831,7 @@ GameObject:
   - component: {fileID: 5392792139184082281}
   - component: {fileID: 2716224190576485058}
   - component: {fileID: 7735198568537806682}
+  - component: {fileID: 8341319436927852832}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -4952,17 +4953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d62faa4d602288c40bb90f1073b0f1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldPrefab1: {fileID: 0}
-  shieldPrefab2: {fileID: 0}
-  shieldAction:
-    m_Name: Shield
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 005901d3-50be-493e-b26e-8b647c2f60e2
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  shieldManager: {fileID: 0}
   playerInput: {fileID: 8251342449818445625}
   moveSpeed: 1
   rotationModifier: 90
@@ -4971,8 +4962,6 @@ MonoBehaviour:
   paddingRight: 0.15
   paddingTop: 0.45
   paddingBottom: 0.2
-  shieldAudioSourceStart: {fileID: 8300000, guid: 185c189cbf5150f47857164b32f658a1, type: 3}
-  shieldAudioSourceEnd: {fileID: 8300000, guid: 0e4a1c1637289bd458ba676a76b80168, type: 3}
 --- !u!114 &411816082063273884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5176,3 +5165,19 @@ MonoBehaviour:
   maxEnergy: 300
   passiveEnergyRestoration: 3
   passiveEnergyRestorationDelay: 0.5
+--- !u!114 &8341319436927852832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251342450643973895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47519882fca44db8adfd5e2ae5e92566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldPrefab1: {fileID: 0}
+  shieldPrefab2: {fileID: 0}
+  shieldAudioSourceStart: {fileID: 0}
+  shieldAudioSourceEnd: {fileID: 0}

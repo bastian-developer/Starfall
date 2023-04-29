@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Characters;
+using Powers;
 
 public class Energy : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Energy : MonoBehaviour
     [SerializeField] private float passiveEnergyRestorationDelay = 1;
     
     private Player _player;
+    private ShieldManager _shieldManager;
     private int _currentEnergy;
     
     private Coroutine _restoreEnergyCoroutine;
@@ -19,6 +21,7 @@ public class Energy : MonoBehaviour
     private void Awake()
     {
         _player = FindObjectOfType<Player>();
+        _shieldManager = FindObjectOfType<ShieldManager>();
         _currentEnergy = maxEnergy;
     }
 
@@ -54,7 +57,7 @@ public class Energy : MonoBehaviour
         {
             if (source == "Shielding")
             {
-                _player.StopShield();
+                _shieldManager.StopShield();
             }
             return false;
         }
