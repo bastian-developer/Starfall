@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Characters;
 
 public class Shooter : MonoBehaviour
 {
@@ -24,7 +23,7 @@ public class Shooter : MonoBehaviour
     
     private AudioPlayer _audioPlayer;
 
-    private Player _player;
+    private Characters.Player _player;
 
     private Energy _energy;
 
@@ -38,10 +37,10 @@ public class Shooter : MonoBehaviour
         return projectileSpeed;
     }
     
-    void Awake()
+    private void Awake()
     {
         _audioPlayer = FindObjectOfType<AudioPlayer>();
-        _player = FindObjectOfType<Player>();
+        _player = FindObjectOfType<Characters.Player>();
         _energy = FindObjectOfType<Energy>();
     }
 
@@ -106,7 +105,6 @@ public class Shooter : MonoBehaviour
                 if (!useAI && _energy.PayEnergyCost(2, "Shooting") )
                 {
                     //Get Mouse position to calculate bullet direction
-                    //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                     instance = Instantiate(projectilePrefab, transform.position, playerRotation);
                     _audioPlayer.PlayRedLaserClip();
                     

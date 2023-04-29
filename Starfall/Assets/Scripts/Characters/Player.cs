@@ -1,23 +1,25 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Powers;
 
 namespace Characters
 {
     public class Player : MonoBehaviour
     {
-        [Header("Powers")] [SerializeField] private Shield shieldPrefab1;
-        [SerializeField] private Shield shieldPrefab2;
+        [Header("Powers")] 
+        [SerializeField] private Powers.Shield shieldPrefab1;
+        [SerializeField] private Powers.Shield shieldPrefab2;
         [SerializeField] private AudioClip shieldAudioSourceStart;
         [SerializeField] private AudioClip shieldAudioSourceEnd;
 
-        [Header("Movement")] [SerializeField] private PlayerInput playerInput;
+        [Header("Movement")] 
+        [SerializeField] private PlayerInput playerInput;
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationModifier;
         [SerializeField] private float rotationSpeed;
 
-        [Header("Padding")] [SerializeField] private float paddingLeft;
+        [Header("Padding")] 
+        [SerializeField] private float paddingLeft;
         [SerializeField] private float paddingRight;
         [SerializeField] private float paddingTop;
         [SerializeField] private float paddingBottom;
@@ -26,10 +28,10 @@ namespace Characters
         private Animator _shieldAnimator1;
         private Animator _shieldAnimator2;
 
-        private AudioSource _shieldAudioSource1;
-        private AudioSource _shieldAudioSource2;
+        private AudioSource _shieldAudioSourceSegment;
+        private AudioSource _shieldAudioSourceLooped;
 
-        private Shield _shieldToHide;
+        private Powers.Shield _shieldToHide;
         private Energy _playerEnergy;
         private Shooter _shooter;
 
@@ -37,14 +39,15 @@ namespace Characters
         private Vector2 _minBounds;
         private Vector2 _maxBounds;
 
-        private Coroutine _restoreEnergyCoroutine;
         private Coroutine _consumeEnergyCoroutine;
-
+        
+        //
+        private Coroutine _shieldingCoroutine;
+        private Coroutine _shieldingSoundCoroutine;
+        
         private bool _shieldSwitch;
         private bool _isShielded;
         private float _shieldOffAnimationTime;
-
-
 
         public float GetRotationSpeed()
         {
@@ -60,13 +63,15 @@ namespace Characters
             _shieldAnimator1 = shieldPrefab1.GetComponent<Animator>();
             _shieldAnimator2 = shieldPrefab2.GetComponent<Animator>();
 
-            _shieldAudioSource1 = gameObject.AddComponent<AudioSource>();
-            _shieldAudioSource2 = GetComponent<AudioSource>();
+            _shieldAudioSourceSegment = gameObject.AddComponent<AudioSource>();
+            //attached as Audio Source Component
+            _shieldAudioSourceLooped = GetComponent<AudioSource>();
+            
             _playerEnergy = GetComponent<Energy>();
 
             //Set Input Action Callbacks
             var shieldAction = playerInput.actions["Shield"];
-            shieldAction.performed += StartShield;
+            shieldAction.performed += StartShieldCallback;
             shieldAction.canceled += StopShieldCallback;
         }
 
@@ -74,32 +79,23 @@ namespace Characters
         {
             Move();
 
-            if (!_isShielded && _shieldAudioSource2.isPlaying)
+            if (!_shieldSwitch)
+            {
+                shieldPrefab1.ManageEnergyConsumption(_isShielded);
+            }
+            else if (_shieldSwitch)
+            {
+                shieldPrefab2.ManageEnergyConsumption(_isShielded);
+            }
+
+            //Hard Stop to Shield Sound Effect if playing and not shielded
+            if (!_isShielded && _shieldAudioSourceLooped.isPlaying)
             {
                 StartCoroutine(WaitAndStopShieldSoundEffect());
             }
-
-            if (_playerEnergy.ShouldRestoreEnergy() && _restoreEnergyCoroutine == null)
-            {
-                _restoreEnergyCoroutine = StartCoroutine(AddEnergyOverTime());
-            }
-            else if (!_playerEnergy.ShouldRestoreEnergy() && _restoreEnergyCoroutine != null)
-            {
-                StopCoroutine(_restoreEnergyCoroutine);
-                _restoreEnergyCoroutine = null;
-            }
-
-            if (_isShielded && _consumeEnergyCoroutine == null)
-            {
-                _consumeEnergyCoroutine = StartCoroutine(RemoveEnergyOverTimeShield());
-            }
-            else if (!_isShielded && _consumeEnergyCoroutine != null)
-            {
-                StopCoroutine(_consumeEnergyCoroutine);
-                _consumeEnergyCoroutine = null;
-            }
+            
         }
-
+        
         private IEnumerator RemoveEnergyOverTimeShield()
         {
             while (_isShielded)
@@ -109,16 +105,19 @@ namespace Characters
             }
         }
 
-        private IEnumerator AddEnergyOverTime()
-        {
-            while (gameObject)
-            {
-                yield return new WaitForSeconds(_playerEnergy.GetPassiveRestorationDelay());
-                _playerEnergy.AddEnergy(_playerEnergy.GetPassiveEnergyRestoration());
-            }
-        }
 
-        void StartShield(InputAction.CallbackContext context)
+
+        private void StartShieldCallback(InputAction.CallbackContext context)
+        {
+            StartShield();
+        }
+        
+        private void StopShieldCallback(InputAction.CallbackContext context)
+        {
+            StopShield();
+        }
+        
+        private void StartShield()
         {
             if (!_shieldSwitch && !_isShielded &&
                 _playerEnergy.PayEnergyCost(shieldPrefab1.EnergyActivationCost, "Shielding"))
@@ -153,40 +152,14 @@ namespace Characters
                 _isShielded = true;
             }
         }
-
-        private void StopShieldSoundEffect()
-        {
-            _shieldAudioSource1.Stop();
-            _shieldAudioSource2.Stop();
-            StopCoroutine(WaitAndSoundShield());
-        }
-
-        private IEnumerator WaitAndStopShieldSoundEffect()
-        {
-            yield return new WaitForSeconds(_shieldAudioSource1.clip.length);
-            StopShieldSoundEffect();
-        }
-
-        private IEnumerator WaitAndSoundShield()
-        {
-            _shieldAudioSource1.clip = shieldAudioSourceStart;
-            _shieldAudioSource1.Play();
-            yield return new WaitForSeconds(_shieldAudioSource1.clip.length);
-            _shieldAudioSource2.Play();
-        }
-
-        private void StopShieldCallback(InputAction.CallbackContext context)
-        {
-            StopShield();
-        }
-
+        
         public void StopShield()
         {
             if (!_shieldSwitch && _isShielded)
             {
                 StopShieldSoundEffect();
-                _shieldAudioSource1.clip = shieldAudioSourceEnd;
-                _shieldAudioSource1.Play();
+                _shieldAudioSourceSegment.clip = shieldAudioSourceEnd;
+                _shieldAudioSourceSegment.Play();
                 _shieldAnimator1.SetTrigger("ShieldOff");
                 _shieldAnimator1.SetBool("Shield", false);
                 StartCoroutine(WaitAndHideShield());
@@ -197,8 +170,8 @@ namespace Characters
             else if (_shieldSwitch && _isShielded)
             {
                 StopShieldSoundEffect();
-                _shieldAudioSource1.clip = shieldAudioSourceEnd;
-                _shieldAudioSource1.Play();
+                _shieldAudioSourceSegment.clip = shieldAudioSourceEnd;
+                _shieldAudioSourceSegment.Play();
                 _shieldAnimator2.SetTrigger("ShieldOff");
                 _shieldAnimator2.SetBool("Shield", false);
                 StartCoroutine(WaitAndHideShield());
@@ -207,7 +180,28 @@ namespace Characters
                 StopCoroutine(RemoveEnergyOverTimeShield());
             }
         }
+        
+        private void StopShieldSoundEffect()
+        {
+            _shieldAudioSourceSegment.Stop();
+            _shieldAudioSourceLooped.Stop();
+            StopCoroutine(WaitAndSoundShield());
+        }
 
+        private IEnumerator WaitAndStopShieldSoundEffect()
+        {
+            yield return new WaitForSeconds(_shieldAudioSourceSegment.clip.length);
+            StopShieldSoundEffect();
+        }
+
+        private IEnumerator WaitAndSoundShield()
+        {
+            _shieldAudioSourceSegment.clip = shieldAudioSourceStart;
+            _shieldAudioSourceSegment.Play();
+            yield return new WaitForSeconds(_shieldAudioSourceSegment.clip.length);
+            _shieldAudioSourceLooped.Play();
+        }
+        
         private IEnumerator WaitAndHideShield()
         {
             if (!_shieldSwitch)

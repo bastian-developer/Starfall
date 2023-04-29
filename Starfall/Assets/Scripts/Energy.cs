@@ -8,17 +8,23 @@ using Characters;
 public class Energy : MonoBehaviour
 {
     [SerializeField] private int maxEnergy = 100;
-    private int _currentEnergy;
     [SerializeField] private int passiveEnergyRestoration = 1;
     [SerializeField] private float passiveEnergyRestorationDelay = 1;
     
     private Player _player;
+    private int _currentEnergy;
+    
+    private Coroutine _restoreEnergyCoroutine;
 
     private void Awake()
     {
         _player = FindObjectOfType<Player>();
         _currentEnergy = maxEnergy;
+    }
 
+    private void Update()
+    {
+        ManageEnergyRestoration();
     }
 
     public int GetPassiveEnergyRestoration()
@@ -55,14 +61,14 @@ public class Energy : MonoBehaviour
         else
         {
             _currentEnergy -= energyCost;
-            Debug.Log("Paid" + energyCost + " on " + source);
-            Debug.Log("Total reamining energy " + _currentEnergy);
+            //Debug.Log("Paid" + energyCost + " on " + source);
+            //Debug.Log("Total reamining energy " + _currentEnergy);
 
             return true;
         }
     }
     
-    public void AddEnergy(int energyAmount)
+    private void AddEnergy(int energyAmount)
     {
         
         _currentEnergy += energyAmount;
@@ -71,7 +77,7 @@ public class Energy : MonoBehaviour
 
     }
     
-    public bool ShouldRestoreEnergy()
+    private bool ShouldRestoreEnergy()
     {
 
         if (_currentEnergy < maxEnergy)
@@ -83,6 +89,28 @@ public class Energy : MonoBehaviour
             return false;
         }
 
+    }
+    
+    private void ManageEnergyRestoration()
+    {
+        if (ShouldRestoreEnergy() && _restoreEnergyCoroutine == null)
+        {
+            _restoreEnergyCoroutine = StartCoroutine(AddEnergyOverTime());
+        }
+        else if (!ShouldRestoreEnergy() && _restoreEnergyCoroutine != null)
+        {
+            StopCoroutine(_restoreEnergyCoroutine);
+            _restoreEnergyCoroutine = null;
+        }
+    }
+    
+    private IEnumerator AddEnergyOverTime()
+    {
+        while (_player)
+        {
+            yield return new WaitForSeconds(passiveEnergyRestorationDelay);
+            AddEnergy(passiveEnergyRestoration);
+        }
     }
     
 }

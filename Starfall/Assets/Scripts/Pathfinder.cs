@@ -1,13 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Characters;
 
 public class Pathfinder : MonoBehaviour
 {
     private EnemySpawner _enemySpawner;
-    private Player _player;
+    private Characters.Player _player;
     private WaveConfigSO _waveConfig;
     private List<Transform> _waypoints;
     private int _waypointIndex = 0;
@@ -21,21 +18,21 @@ public class Pathfinder : MonoBehaviour
         
     }
 
-    void Start()
+    private void Start()
     {
         _waveConfig = _enemySpawner.GetCurrentWave();
         _waypoints = _waveConfig.GetWaypoints();
         transform.position = _waypoints[_waypointIndex].position;
-        _player = FindObjectOfType<Player>();
+        _player = FindObjectOfType<Characters.Player>();
     }
     
-    void Update()
+    private void Update()
     {
         FollowPath();
         RotateTowardsPlayer();
     }
     
-    void RotateTowardsPlayer()
+    private void RotateTowardsPlayer()
     {
         if (_player)
         {
@@ -48,7 +45,7 @@ public class Pathfinder : MonoBehaviour
         
     }
 
-    void FollowPath()
+    private void FollowPath()
     {
         if (_waypointIndex < _waypoints.Count)
         {
