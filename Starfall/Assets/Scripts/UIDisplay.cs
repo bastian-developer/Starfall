@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
-
+using Powers;
 
 public class UIDisplay : MonoBehaviour
 {
@@ -31,14 +30,14 @@ public class UIDisplay : MonoBehaviour
     void Start()
     {
         healthSlider.maxValue = _playerHealth.GetCurrentHealth();
-        energySlider.maxValue = _playerEnergy.GetCurrentEnergy();
+        energySlider.maxValue = _playerEnergy.CurrentEnergy;
 
     }
 
     void Update()
     {
         healthSlider.value = _playerHealth.GetCurrentHealth();
-        energySlider.value = _playerEnergy.GetCurrentEnergy();
+        energySlider.value = _playerEnergy.CurrentEnergy;
         scoreText.text = _scoreKeeper.GetScore().ToString("000000000");
     }
 

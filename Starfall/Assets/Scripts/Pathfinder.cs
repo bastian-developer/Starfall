@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Characters;
 
 public class Pathfinder : MonoBehaviour
 {
     private EnemySpawner _enemySpawner;
-    private Characters.Player _player;
+    private Player _player;
     private WaveConfigSO _waveConfig;
     private List<Transform> _waypoints;
     private int _waypointIndex = 0;
@@ -23,7 +24,7 @@ public class Pathfinder : MonoBehaviour
         _waveConfig = _enemySpawner.GetCurrentWave();
         _waypoints = _waveConfig.GetWaypoints();
         transform.position = _waypoints[_waypointIndex].position;
-        _player = FindObjectOfType<Characters.Player>();
+        _player = FindObjectOfType<Player>();
     }
     
     private void Update()

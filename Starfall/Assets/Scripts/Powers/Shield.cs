@@ -9,11 +9,7 @@ namespace Powers
         // The player and laser prefab to be used.
         [Header("Setup")] [SerializeField] private GameObject player;
         [SerializeField] private GameObject laserPrefab;
-        
-        //Audio clips needed for sound effect
-        //[SerializeField] private AudioClip shieldAudioSourceStart;
-        //[SerializeField] private AudioClip shieldAudioSourceEnd;
-        
+
         // The speed at which the shield rotates and follows the player.
         [Header("Movement")] [SerializeField] private float rotationSpeed;
         [SerializeField] private float followSpeed;
@@ -26,10 +22,7 @@ namespace Powers
         private AudioPlayer _audioPlayer;
         private Coroutine _consumeEnergyCoroutine;
         private Energy _playerEnergy;
-        
-
         private bool _shieldSwitch;
-
         
         // The rotation of the player.
         private Quaternion PlayerRotation => player.transform.rotation;
@@ -56,7 +49,6 @@ namespace Powers
         private void Update()
         {
             FollowPlayer();
-            //ManageEnergyConsumption();
         }
 
         private void FollowPlayer()
@@ -65,7 +57,6 @@ namespace Powers
             if (!player) return;
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, followSpeed);
             transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
-
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -88,6 +79,7 @@ namespace Powers
             }
         }
         
+        //Verifies if the player should consume energy in shielding actions
         public void ManageEnergyConsumption(bool isShielded)
         {
             if (isShielded && _consumeEnergyCoroutine == null)
@@ -101,6 +93,7 @@ namespace Powers
             }
         }
 
+        //Calls energy class to reduce current energy quantity
         private IEnumerator RemoveEnergyOverTimeShield(bool isShielded)
         {
             while (isShielded)

@@ -11,16 +11,16 @@ namespace Powers
         [SerializeField] private Shield shieldPrefab2;
         [SerializeField] private AudioClip shieldAudioSourceStart;
         [SerializeField] private AudioClip shieldAudioSourceEnd;
-        //Add Audio Source as Component
-        //Add ShieldManager to Player
-        
+
         private Animator _shieldAnimator1;
         private Animator _shieldAnimator2;
         
         private AudioSource _shieldAudioSourceSegment;
         private AudioSource _shieldAudioSourceLooped;
         
-        private Powers.Shield _shieldToHide;
+        private Shield _shieldToHide;
+        private Shield _currentShield;
+
         
         private Energy _playerEnergy;
 
@@ -39,7 +39,8 @@ namespace Powers
             _shieldAnimator2 = shieldPrefab2.GetComponent<Animator>();
 
             _shieldAudioSourceSegment = gameObject.AddComponent<AudioSource>();
-            //attached as Audio Source Component
+            
+            //Attached as Audio Source Component
             _shieldAudioSourceLooped = GetComponent<AudioSource>();
             
             _playerEnergy = GetComponent<Energy>();

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Characters;
+using Powers;
 
 public class Shooter : MonoBehaviour
 {
@@ -23,7 +25,7 @@ public class Shooter : MonoBehaviour
     
     private AudioPlayer _audioPlayer;
 
-    private Characters.Player _player;
+    private Player _player;
 
     private Energy _energy;
 
@@ -40,7 +42,7 @@ public class Shooter : MonoBehaviour
     private void Awake()
     {
         _audioPlayer = FindObjectOfType<AudioPlayer>();
-        _player = FindObjectOfType<Characters.Player>();
+        _player = FindObjectOfType<Player>();
         _energy = FindObjectOfType<Energy>();
     }
 
