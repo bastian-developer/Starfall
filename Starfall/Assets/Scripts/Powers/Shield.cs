@@ -82,14 +82,15 @@ namespace Powers
         //Verifies if the player should consume energy in shielding actions
         public void ManageEnergyConsumption(bool isShielded)
         {
-            if (isShielded && _consumeEnergyCoroutine == null)
+            switch (isShielded)
             {
-                _consumeEnergyCoroutine = StartCoroutine(RemoveEnergyOverTimeShield(isShielded));
-            }
-            else if (!isShielded && _consumeEnergyCoroutine != null)
-            {
-                StopCoroutine(_consumeEnergyCoroutine);
-                _consumeEnergyCoroutine = null;
+                case true when _consumeEnergyCoroutine == null:
+                    _consumeEnergyCoroutine = StartCoroutine(RemoveEnergyOverTimeShield(isShielded));
+                    break;
+                case false when _consumeEnergyCoroutine != null:
+                    StopCoroutine(_consumeEnergyCoroutine);
+                    _consumeEnergyCoroutine = null;
+                    break;
             }
         }
 

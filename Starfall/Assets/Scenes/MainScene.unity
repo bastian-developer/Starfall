@@ -2260,5 +2260,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8341319436927852832, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
+      propertyPath: shieldPrefab1
+      value: 
+      objectReference: {fileID: 1952989115}
+    - target: {fileID: 8341319436927852832, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
+      propertyPath: shieldPrefab2
+      value: 
+      objectReference: {fileID: 1808095782}
+    - target: {fileID: 8341319436927852832, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
+      propertyPath: shieldAudioSourceEnd
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e4a1c1637289bd458ba676a76b80168, type: 3}
+    - target: {fileID: 8341319436927852832, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
+      propertyPath: shieldAudioSourceStart
+      value: 
+      objectReference: {fileID: 8300000, guid: 185c189cbf5150f47857164b32f658a1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
