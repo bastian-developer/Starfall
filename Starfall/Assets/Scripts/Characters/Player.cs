@@ -6,8 +6,7 @@ namespace Characters
 {
     public class Player : MonoBehaviour
     {
-        [Header("Powers")] 
-        [SerializeField] private ShieldManager shieldManager;
+
 
         [Header("Movement")] 
         [SerializeField] private PlayerInput playerInput;
@@ -28,6 +27,9 @@ namespace Characters
         private Camera _mainCamera;
         private Mouse _mouse;
 
+        private ShieldManager _shieldManager;
+
+        
         public float RotationSpeed
         {
             get => rotationSpeed;
@@ -39,7 +41,7 @@ namespace Characters
             _shooter = GetComponent<Shooter>();
             var animator = GetComponent<Animator>();
             _playerAnimator = new PlayerAnimator(animator);
-            shieldManager = FindObjectOfType<ShieldManager>();
+            _shieldManager = FindObjectOfType<ShieldManager>();
             _mainCamera = Camera.main;
             _mouse = Mouse.current;
 
@@ -81,13 +83,13 @@ namespace Characters
         //Called when player presses space, ask to shield manager to activate one of the shields
         private void StartShieldCallback(InputAction.CallbackContext context)
         {
-            shieldManager.StartShield();
+            _shieldManager.StartShield();
         }
 
         //Called when player releases space, ask to shield manager to disable current shield
         private void StopShieldCallback(InputAction.CallbackContext context)
         {
-            shieldManager.StopShield();
+            _shieldManager.StopShield();
         }
 
         //Transform player character position to player input
