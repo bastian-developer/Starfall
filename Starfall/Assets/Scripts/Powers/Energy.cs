@@ -55,7 +55,14 @@ namespace Powers
         // Function that add the amount of energy passed to
         public void AddEnergy(int energyAmount)
         {
-            _currentEnergy += energyAmount;
+            if (_currentEnergy + energyAmount > maxEnergy)
+            {
+                _currentEnergy = maxEnergy;
+            }
+            else
+            {
+                _currentEnergy += energyAmount;
+            }
         }
         
         // This function validates if the energy bar of the player is at his maximum

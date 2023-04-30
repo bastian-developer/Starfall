@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 377015292446204780}
   - component: {fileID: 4287257696508089118}
   - component: {fileID: 4287257696508089185}
+  - component: {fileID: -4417864354970888180}
   m_Layer: 7
   m_Name: Enemy B
   m_TagString: Untagged
@@ -214,3 +215,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4417864354970888180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287257696508089184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f5c78e797d41ad821b9edde9f0c0a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDrops:
+  - itemPrefab: {fileID: 3642796367358504699, guid: 7d008076e4ab5664daae18d972854c81, type: 3}
+    lifespan: 5
+    dropRate: 30

@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using Items;
+using Enemies;
 
 namespace Powers
 {
@@ -8,9 +10,9 @@ namespace Powers
         [Header("Setup")] 
         [SerializeField] private bool isPlayer;
         [SerializeField] private int score;
-        [SerializeField] private int maxHealth = 100;
-        [SerializeField] private int passiveHealthRestoration = 1;
-        [SerializeField] private float passiveHealthRestorationDelay = 1;
+        [SerializeField] private int maxHealth;
+        [SerializeField] private int passiveHealthRestoration ;
+        [SerializeField] private float passiveHealthRestorationDelay;
         [SerializeField] private ParticleSystem hitEffect;
         [SerializeField] private bool applyCameraShake;
 
@@ -21,10 +23,7 @@ namespace Powers
         private LevelManager _levelManager;
         private Coroutine _restoreHealthCoroutine;
 
-        public int GetCurrentHealth()
-        {
-            return _currentHealth;
-        }
+        public int CurrentHealth => _currentHealth;
 
         private void Awake()
         {
@@ -112,8 +111,6 @@ namespace Powers
             {
                 Die();
             }
-            
-            Debug.Log(damage + " " + _currentHealth);
         }
 
         // A method that handles death
@@ -123,6 +120,9 @@ namespace Powers
             {
                 // Modify the score if this is not the player
                 _scoreKeeper.ModifyScore(score);
+                GameObject o;
+                var dropper = (o = gameObject).GetComponent<EnemyDropper>();
+                dropper.DropItems(o);
             }
             else
             {

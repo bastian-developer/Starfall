@@ -20,23 +20,23 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     private ScoreKeeper _scoreKeeper;
 
-    void Awake()
+    private void Awake()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         _playerHealth = FindObjectOfType<Health>();
         _playerEnergy = FindObjectOfType<Energy>();
     }
 
-    void Start()
+    private void Start()
     {
-        healthSlider.maxValue = _playerHealth.GetCurrentHealth();
+        healthSlider.maxValue = _playerHealth.CurrentHealth;
         energySlider.maxValue = _playerEnergy.CurrentEnergy;
 
     }
 
-    void Update()
+    private void Update()
     {
-        healthSlider.value = _playerHealth.GetCurrentHealth();
+        healthSlider.value = _playerHealth.CurrentHealth;
         energySlider.value = _playerEnergy.CurrentEnergy;
         scoreText.text = _scoreKeeper.GetScore().ToString("000000000");
     }
