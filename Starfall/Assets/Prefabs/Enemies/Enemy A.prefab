@@ -230,4 +230,7 @@ MonoBehaviour:
   itemDrops:
   - itemPrefab: {fileID: 3642796367358504699, guid: 7d008076e4ab5664daae18d972854c81, type: 3}
     lifespan: 5
-    dropRate: 30
+    dropRate: 20
+  - itemPrefab: {fileID: 7192901136799458419, guid: 2c1da54c7e3310f4dbbd3311875d1387, type: 3}
+    lifespan: 5
+    dropRate: 10

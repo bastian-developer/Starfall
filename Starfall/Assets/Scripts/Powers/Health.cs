@@ -1,4 +1,5 @@
 using System.Collections;
+using Characters;
 using UnityEngine;
 using Items;
 using Enemies;
@@ -41,6 +42,30 @@ namespace Powers
             return _currentHealth < maxHealth;
         }
 
+        public void AddHealth(int healthAmount)
+        {
+            if (_currentHealth + healthAmount > maxHealth && isPlayer)
+            {
+                _currentHealth = maxHealth;
+                Debug.Log("health cap");
+                Debug.Log("amount " + healthAmount );
+                Debug.Log("_currentHealth " + _currentHealth );
+                Debug.Log("maxHealth " + maxHealth );
+            }
+            else if (isPlayer)
+            {
+                _currentHealth += healthAmount;
+                Debug.Log("health");
+                Debug.Log("amount " + healthAmount );
+                Debug.Log("_currentHealth " + _currentHealth );
+                Debug.Log("maxHealth " + maxHealth );
+            }
+            else
+            {
+                Debug.Log("xd");
+            }
+        }
+        
         private void Update()
         {
             switch (isPlayer)
