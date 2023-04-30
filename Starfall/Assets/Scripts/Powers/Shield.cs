@@ -17,6 +17,7 @@ namespace Powers
         // The energy required to activate the shield, the energy cost per second, and the delay between energy consumption.
         [Header("Energy")] [SerializeField] private int energyActivationCost;
         [SerializeField] private int energyCostOverTime;
+        [SerializeField] private int energyCostIncrease;
         [SerializeField] private float energyConsumptionDelay;
 
         private AudioPlayer _audioPlayer;
@@ -93,12 +94,17 @@ namespace Powers
         }
 
         // Calls energy class to reduce current energy quantity
+        // Increasing the value each time
         private IEnumerator RemoveEnergyOverTimeShield(bool isShielded)
         {
+            var energyCost = energyCostOverTime;
             while (isShielded)
             {
                 yield return new WaitForSeconds(energyConsumptionDelay);
-                _playerEnergy.PayEnergyCost(energyCostOverTime, "Shielding");
+                _playerEnergy.PayEnergyCost(energyCost, "Shielding");
+
+                // Increase energyCost by a fixed amount each time
+                energyCost += energyCostIncrease; // Change this value as desired
             }
         }
     }

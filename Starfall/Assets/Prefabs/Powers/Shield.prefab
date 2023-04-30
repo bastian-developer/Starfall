@@ -105,6 +105,7 @@ MonoBehaviour:
   followSpeed: 500000
   energyActivationCost: 10
   energyCostOverTime: 4
+  energyCostIncrease: 2
   energyConsumptionDelay: 0.5
 --- !u!58 &6100108239881391288
 CircleCollider2D:
