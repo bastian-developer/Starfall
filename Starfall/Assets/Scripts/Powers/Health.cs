@@ -42,27 +42,16 @@ namespace Powers
             return _currentHealth < maxHealth;
         }
 
+        //Public method that when called adds the amount of health passed
         public void AddHealth(int healthAmount)
         {
             if (_currentHealth + healthAmount > maxHealth && isPlayer)
             {
                 _currentHealth = maxHealth;
-                Debug.Log("health cap");
-                Debug.Log("amount " + healthAmount );
-                Debug.Log("_currentHealth " + _currentHealth );
-                Debug.Log("maxHealth " + maxHealth );
             }
             else if (isPlayer)
             {
                 _currentHealth += healthAmount;
-                Debug.Log("health");
-                Debug.Log("amount " + healthAmount );
-                Debug.Log("_currentHealth " + _currentHealth );
-                Debug.Log("maxHealth " + maxHealth );
-            }
-            else
-            {
-                Debug.Log("xd");
             }
         }
         

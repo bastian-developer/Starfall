@@ -70,13 +70,11 @@ namespace Powers
     
             // Set the velocity of the laser instance to the speed of the player's
             // projectiles and destroy it after a set lifetime.
-            if (laserInstance.TryGetComponent(out Rigidbody2D laserRigidbody))
-            {
-                var projectileSpeed = player.GetComponent<Shooter>().GetProjectileSpeed();
-                laserRigidbody.velocity = player.transform.up * projectileSpeed;
-                var projectileLifetime = player.GetComponent<Shooter>().GetProjectileLifetime();
-                Destroy(laserInstance, projectileLifetime);
-            }
+            if (!laserInstance.TryGetComponent(out Rigidbody2D laserRigidbody)) return;
+            var projectileSpeed = player.GetComponent<Shooter>().GetProjectileSpeed();
+            laserRigidbody.velocity = player.transform.up * projectileSpeed;
+            var projectileLifetime = player.GetComponent<Shooter>().GetProjectileLifetime();
+            Destroy(laserInstance, projectileLifetime);
         }
         
         // Verifies if the player should consume energy in shielding actions
