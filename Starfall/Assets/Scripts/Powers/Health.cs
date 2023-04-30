@@ -128,7 +128,7 @@ namespace Powers
         }
 
         // A method that handles death
-        private void Die()
+        public void Die()
         {
             if (!isPlayer)
             {

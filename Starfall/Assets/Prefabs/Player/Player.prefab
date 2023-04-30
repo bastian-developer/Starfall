@@ -4832,6 +4832,7 @@ GameObject:
   - component: {fileID: 2716224190576485058}
   - component: {fileID: 7735198568537806682}
   - component: {fileID: 8341319436927852832}
+  - component: {fileID: 2723382854675055087}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -5179,3 +5180,17 @@ MonoBehaviour:
   shieldPrefab2: {fileID: 0}
   shieldAudioSourceStart: {fileID: 0}
   shieldAudioSourceEnd: {fileID: 0}
+--- !u!114 &2723382854675055087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251342450643973895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c56b775fa874e4088ec265b9bae2325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxQuantity: 3
+  bombPrefab: {fileID: 0}

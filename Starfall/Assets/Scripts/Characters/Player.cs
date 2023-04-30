@@ -26,6 +26,7 @@ namespace Characters
         private Mouse _mouse;
 
         private ShieldManager _shieldManager;
+        private BombManager _bombManager;
 
         public float RotationSpeed
         {
@@ -39,6 +40,8 @@ namespace Characters
             var animator = GetComponent<Animator>();
             _playerAnimator = new PlayerAnimator(animator);
             _shieldManager = FindObjectOfType<ShieldManager>();
+            _bombManager = FindObjectOfType<BombManager>();
+
             _mainCamera = Camera.main;
             _mouse = Mouse.current;
 
@@ -75,6 +78,11 @@ namespace Characters
         private void OnFire(InputValue value)
         {
             _shooter.isFiring = value.isPressed;
+        }
+        
+        private void OnBomb(InputValue value)
+        {
+            _bombManager.Explode();
         }
 
         // Called when player presses space, ask to shield manager to activate one of the shields
