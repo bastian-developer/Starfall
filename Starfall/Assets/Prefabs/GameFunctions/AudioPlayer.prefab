@@ -51,10 +51,14 @@ MonoBehaviour:
   redLaserVolume: 0.4
   shieldClip: {fileID: 8300000, guid: 6c9ed84229d203240b6b7b18674deecc, type: 3}
   shieldClipVolume: 0.715
+  explosionClip: {fileID: 8300000, guid: fc208d92a45e2f7479ad1d95d35dda32, type: 3}
+  explosionClipVolume: 1
   energyBatteryClip: {fileID: 8300000, guid: 1650f39868bb03f478bc8e3654512ef8, type: 3}
   energyBatteryVolume: 1
   lifeBatteryClip: {fileID: 8300000, guid: 75394ca722a45214c99ec03e6740bb2d, type: 3}
   lifeBatteryVolume: 1
+  bombClip: {fileID: 8300000, guid: ea31ca7ef3002bd4c9c78b4ad25abeba, type: 3}
+  bombClipVolume: 1
   playerDamageClip: {fileID: 8300000, guid: 9a6a53d1fedc2434aa5df08e70ec053f, type: 3}
   playerDamageVolume: 0.412
   alienDamageClip: {fileID: 8300000, guid: b061dfca3dd9e6043a20e5f1804f60e0, type: 3}

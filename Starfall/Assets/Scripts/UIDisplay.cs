@@ -20,18 +20,23 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     private ScoreKeeper _scoreKeeper;
 
+    [Header("Bombs")]
+    [SerializeField] TextMeshProUGUI bombText;
+    private BombManager _bombManager;
+    
     private void Awake()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         _playerHealth = FindObjectOfType<Health>();
         _playerEnergy = FindObjectOfType<Energy>();
+        _bombManager = FindObjectOfType<BombManager>();
+
     }
 
     private void Start()
     {
         healthSlider.maxValue = _playerHealth.CurrentHealth;
         energySlider.maxValue = _playerEnergy.CurrentEnergy;
-
     }
 
     private void Update()
@@ -39,6 +44,7 @@ public class UIDisplay : MonoBehaviour
         healthSlider.value = _playerHealth.CurrentHealth;
         energySlider.value = _playerEnergy.CurrentEnergy;
         scoreText.text = _scoreKeeper.GetScore().ToString("000000000");
+        bombText.text = "* " + _bombManager.CurrentBombs.ToString();
     }
 
 }

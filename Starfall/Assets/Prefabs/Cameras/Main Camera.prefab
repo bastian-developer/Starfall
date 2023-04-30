@@ -145,3 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 0.3
   shakeMagnitude: 0.08
+  bombShakeDuration: 1
+  bombShakeMagnitude: 0.15

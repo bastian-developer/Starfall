@@ -96,14 +96,18 @@ namespace Powers
             ShakeCamera();
             
             
+            
+            //damageDealer.Hit();
+
+            
             // Notify the DamageDealer that it has hit something
             if (isPlayer)
             {
-                damageDealer.GetDamage();
+                //damageDealer.GetDamage();
             }
             else
             {
-                damageDealer.Hit();
+                //damageDealer.Hit();
             }
         }
 

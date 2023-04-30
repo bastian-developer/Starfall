@@ -5193,4 +5193,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxQuantity: 3
-  bombPrefab: {fileID: 0}
+  startingQuantity: 0
+  _animator: {fileID: 0}

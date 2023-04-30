@@ -8,14 +8,20 @@ namespace Powers
     {
         [Header("Setup")] 
         [SerializeField] private int maxQuantity;
+        [SerializeField] private int startingQuantity;
 
         private int _currentQuantity;
         private CameraShake _cameraShake;
+        private AudioPlayer _audioPlayer;
+        [SerializeField] private Animator _animator;
+
+        public int CurrentBombs => _currentQuantity;
 
         private void Awake()
         {
-            _currentQuantity = maxQuantity;
+            _currentQuantity = startingQuantity;
             _cameraShake = FindObjectOfType<CameraShake>();
+            _audioPlayer = FindObjectOfType<AudioPlayer>();
         }
 
         private bool CanBomb()
@@ -23,11 +29,12 @@ namespace Powers
             return _currentQuantity > 0;
         }
 
-        public void AddBomb()
+        public void AddBombs(int quantity)
         {
             if (_currentQuantity < maxQuantity )
             {
-                _currentQuantity += 1;
+                _currentQuantity += quantity;
+                Debug.Log("Bombs added " + _currentQuantity);
             }
         }
 
@@ -42,20 +49,26 @@ namespace Powers
         public void Explode()
         {
             if (!CanBomb()) return;
-            //Animate
-            //Sound effect
-            //bomb item
-            _cameraShake.Play();
+            _audioPlayer.PlayExplosionClip();
+            _animator.SetTrigger("Explode");
+            _cameraShake.PlayBomb();
             _currentQuantity -= 1;
             Debug.Log("Bombed " + _currentQuantity);
             
-            GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Enemy");
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-            foreach (var VARIABLE in objectsWithTag)
+            
+            foreach (var variable in enemies)
             {
-                VARIABLE.GetComponent<Health>().Die();
+                variable.GetComponent<Health>().Die();
             }
+            
+            var lasers = GameObject.FindGameObjectsWithTag("Laser");
 
+            foreach (var variable in lasers)
+            {
+                Destroy(variable.gameObject);
+            }
         }
         
         

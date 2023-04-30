@@ -15,12 +15,16 @@ public class AudioPlayer : MonoBehaviour
     [Header("Powers")] 
     [SerializeField] AudioClip shieldClip;
     [SerializeField] [Range(0f, 1f)] float shieldClipVolume = 1f;
+    [SerializeField] AudioClip explosionClip;
+    [SerializeField] [Range(0f, 1f)] float explosionClipVolume = 1f;
 
     [Header("Items")] 
     [SerializeField] AudioClip energyBatteryClip;
     [SerializeField] [Range(0f, 1f)] float energyBatteryVolume = 1f;
     [SerializeField] AudioClip lifeBatteryClip;
     [SerializeField] [Range(0f, 1f)] float lifeBatteryVolume = 1f;
+    [SerializeField] AudioClip bombClip;
+    [SerializeField] [Range(0f, 1f)] float bombClipVolume = 1f;
     
     [Header("Damage")] 
     [SerializeField] AudioClip playerDamageClip;
@@ -61,6 +65,16 @@ public class AudioPlayer : MonoBehaviour
             _audioInstance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    public void PlayBombClip()
+    {
+        PlayClip(bombClip, bombClipVolume);
+    }
+    
+    public void PlayExplosionClip()
+    {
+        PlayClip(explosionClip, explosionClipVolume);
     }
 
     public void PlayEnergyBatteryClip()

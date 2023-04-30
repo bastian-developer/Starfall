@@ -14,45 +14,6 @@ public class LevelManager : MonoBehaviour
     
     private ScoreKeeper _scoreKeeper;
 
-    
-    /*
-    private static LevelManager _levelManagerInstance;
-
-    //
-    public LevelManager GetInstance()
-    {
-        return _levelManagerInstance;
-    }
-
-    //
-    private void Awake()
-    {
-        ManageSingleton();
-    }
-
-    //
-    void ManageSingleton()
-    {
-        
-        Debug.Log("out" +_levelManagerInstance);
-        
-        if(_levelManagerInstance != null)
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-            
-            Debug.Log("!= null" +_levelManagerInstance);
-        }
-        else
-        {
-            _levelManagerInstance = this;
-            DontDestroyOnLoad(gameObject);
-            
-            Debug.Log("else" +_levelManagerInstance);
-        }
-    }
-    */
-    
     private void Start()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
