@@ -7,21 +7,33 @@ using Powers;
 
 public class Shooter : MonoBehaviour
 {
-    [Header("General")]
+    [Header("Primary Weapon")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float projectileLifetime = 5f;
     [SerializeField] private float baseFiringRate = 0.2f;
+    [SerializeField] private int energyCost;
+
+    
+    [Header("Secondary Weapon")]
+    [SerializeField] private GameObject projectilePrefabSecondary;
+    [SerializeField] private float projectileSpeedSecondary = 10f;
+    [SerializeField] private float projectileLifetimeSecondary = 5f;
+    [SerializeField] private float baseFiringRateSecondary = 0.2f;
+    [SerializeField] private int energyCostSecondary;
+
     
     [Header("AI")]
     [SerializeField] private bool useAI;
     [SerializeField] private float firingRateVariance = 0f;
     [SerializeField] private float minimumFiringRate = 0.1f;
-
-
+    
     [HideInInspector] public bool isFiring;
+    [HideInInspector] public bool isFiringSecondary;
 
     private Coroutine _firingCoroutine;
+    private Coroutine _firingCoroutineSecondary;
+
     
     private AudioPlayer _audioPlayer;
 
@@ -47,7 +59,7 @@ public class Shooter : MonoBehaviour
     }
 
     
-    void Start()
+    private void Start()
     {
         if (useAI)
         {
@@ -55,7 +67,7 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         // Call Fire() only when isFiring state changes
         if (isFiring && _firingCoroutine == null)
@@ -67,18 +79,40 @@ public class Shooter : MonoBehaviour
             StopCoroutine(_firingCoroutine);
             _firingCoroutine = null;
         }
+        
+        if (isFiringSecondary && _firingCoroutineSecondary == null)
+        {
+            Fire();
+        }
+        else if (!isFiringSecondary && _firingCoroutineSecondary != null)
+        {
+            StopCoroutine(_firingCoroutineSecondary);
+            _firingCoroutineSecondary = null;
+        }
     }
 
-    void Fire()
+    private void Fire()
     {
-        if (isFiring && _firingCoroutine == null)
+        switch (isFiring)
         {
-            _firingCoroutine = StartCoroutine(FireContinuosly());
+            case true when _firingCoroutine == null:
+                _firingCoroutine = StartCoroutine(FireContinuosly1());
+                break;
+            case false when _firingCoroutine != null:
+                StopCoroutine(_firingCoroutine);
+                _firingCoroutine = null;
+                break;
         }
-        else if(!isFiring && _firingCoroutine != null)
+
+        switch (isFiringSecondary)
         {
-            StopCoroutine(_firingCoroutine);
-            _firingCoroutine = null;
+            case true when _firingCoroutineSecondary == null:
+                _firingCoroutineSecondary = StartCoroutine(FireContinuosly2());
+                break;
+            case false when _firingCoroutineSecondary != null:
+                StopCoroutine(_firingCoroutineSecondary);
+                _firingCoroutineSecondary = null;
+                break;
         }
     }
 
@@ -91,20 +125,18 @@ public class Shooter : MonoBehaviour
         return q;
     }
 
-    IEnumerator FireContinuosly()
+    IEnumerator FireContinuosly1()
     {
         while (true)
         {
-            GameObject instance;
-            
-            
             if (_player)
             {
-                Vector3 playerPosition = _player.transform.position;
-                Quaternion playerRotation = _player.transform.rotation;
-
+                var transform1 = _player.transform;
+                var playerPosition = transform1.position;
+                var playerRotation = transform1.rotation;
                 
-                if (!useAI && _energy.PayEnergyCost(2, "Shooting") )
+                GameObject instance;
+                if (!useAI && _energy.PayEnergyCost(energyCost, "Shooting") )
                 {
                     //Get Mouse position to calculate bullet direction
                     instance = Instantiate(projectilePrefab, transform.position, playerRotation);
@@ -138,19 +170,49 @@ public class Shooter : MonoBehaviour
             }
             
             
-            float timeToNextProjectile = Random.Range(baseFiringRate - firingRateVariance,
-                baseFiringRate + firingRateVariance);
+            var timeToNextProjectile = Random.Range(baseFiringRate - firingRateVariance, baseFiringRate + firingRateVariance);
             
             timeToNextProjectile = Mathf.Clamp(timeToNextProjectile, minimumFiringRate, float.MaxValue);
-            
-            
-            //Get the private static instance through public getter via SINGLETON
-            //_audioPlayer.GetInstance().PlayShootingClip();
-            
+
             yield return new WaitForSeconds(timeToNextProjectile);
 
         }
     }
     
+    IEnumerator FireContinuosly2()
+    {
+        while (true)
+        {
+            if (_player)
+            {
+                var transform1 = _player.transform;
+                var playerRotation = transform1.rotation;
+                
+                GameObject instance;
+                if (!useAI && _energy.PayEnergyCost(energyCostSecondary, "Shooting") )
+                {
+                    //Get Mouse position to calculate bullet direction
+                    instance = Instantiate(projectilePrefabSecondary, transform.position, playerRotation);
+                    
+                    //Secondary sound effect
+                    _audioPlayer.PlayRedLaserClip();
+                    
+                    Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+            
+                    if (rb != null)
+                    {
+                        rb.velocity = transform.up * projectileSpeedSecondary;
+                    }
+                
+                    Destroy(instance, projectileLifetimeSecondary);
+                }
+            }
+            
+            
+            var timeToNextProjectile = baseFiringRateSecondary;
+            yield return new WaitForSeconds(timeToNextProjectile);
+
+        }
+    }
 
 }

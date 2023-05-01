@@ -3,6 +3,7 @@ using Characters;
 using UnityEngine;
 using Items;
 using Enemies;
+using Unity.VisualScripting;
 
 namespace Powers
 {
@@ -86,7 +87,20 @@ namespace Powers
         private void OnTriggerEnter2D(Collider2D other)
         {
             // Get the DamageDealer component from the collider
-            var damageDealer = other.GetComponent<DamageDealer>();
+            //var damageDealer = other.GetComponent<DamageDealer>();
+
+            DamageDealer damageDealer = null;
+            
+            if (other.gameObject.CompareTag("Laser"))
+            {
+                damageDealer = other.GetComponent<DamageDealer>();
+            }
+            else
+            {
+                //Debug.Log("Health damageDealer " + gameObject);
+
+            }
+            
             // If there is no DamageDealer component, do nothing
             if (damageDealer == null) return;
             // Take damage from the DamageDealer
@@ -94,20 +108,17 @@ namespace Powers
             // Play a hit effect and shake the camera
             PlayHitEffect();
             ShakeCamera();
-            
-            
-            
-            //damageDealer.Hit();
-
-            
             // Notify the DamageDealer that it has hit something
-            if (isPlayer)
+            //damageDealer.Hit();
+            if (other.gameObject.CompareTag("Laser"))
             {
-                //damageDealer.GetDamage();
+                damageDealer.Hit();
+                //Debug.Log("Health compareTag " + gameObject);
             }
             else
             {
-                //damageDealer.Hit();
+                //Debug.Log("Health compareTag else " + gameObject);
+
             }
         }
 

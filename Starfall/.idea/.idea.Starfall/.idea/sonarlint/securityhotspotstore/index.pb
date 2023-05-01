@@ -1,8 +1,6 @@
 
 M
 Assets/Scripts/ScoreKeeper.cs,5\8\5844474ffda0dd9154be114b1d0a955f3502e650
-L
-Assets/Scripts/Pathfinder.cs,d\a\da82b474c447cb42cd7356f104f039987f74bf1d
 [
 +Assets/Scripts/Characters/PlayerAnimator.cs,9\8\98ce14c48e25cf26d06f5a1ffffb9f9c842849b1
 O
@@ -13,7 +11,9 @@ V
 &Assets/Scripts/Enemies/EnemyDropper.cs,a\b\ab9c4a193deeb70085ef1012c365c65603474e07
 V
 &Assets/Scripts/Powers/ShieldManager.cs,b\7\b7e32b064706fee0534dcd79d11cb98e207f7a13
-O
-Assets/Scripts/Powers/Shield.cs,7\c\7c008e85e0c06adfb613fddd41461c6a453a78c2
 U
 %Assets/Scripts/Items/EnergyBattery.cs,8\1\81e8566e5a5afb605197c266abafb1f635789f98
+K
+Assets/Scripts/UIDisplay.cs,5\a\5a3acfec53cd94014cf4fcc6a2814489b880599a
+M
+Assets/Scripts/CameraShake.cs,1\8\1828925480fb259b6d259927f8195316f427361e

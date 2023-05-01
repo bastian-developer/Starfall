@@ -62,6 +62,8 @@ public class Pathfinder : MonoBehaviour
         }
         else
         {
+            //_waypointIndex--;
+            //Debug.Log(gameObject);
             Destroy(gameObject);
         }
     }

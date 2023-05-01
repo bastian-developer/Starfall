@@ -4977,10 +4977,17 @@ MonoBehaviour:
   projectileSpeed: 3
   projectileLifetime: 2
   baseFiringRate: 0.2
+  energyCost: 2
+  projectilePrefabSecondary: {fileID: 7306692227792423664, guid: fea9d4d105e5273459c7168699478bd4, type: 3}
+  projectileSpeedSecondary: 2
+  projectileLifetimeSecondary: 2
+  baseFiringRateSecondary: 0.2
+  energyCostSecondary: 5
   useAI: 0
   firingRateVariance: 0
   minimumFiringRate: 0.1
   isFiring: 0
+  isFiringSecondary: 0
 --- !u!95 &2259734583083368136
 Animator:
   serializedVersion: 4

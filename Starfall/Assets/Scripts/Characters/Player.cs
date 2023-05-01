@@ -79,6 +79,12 @@ namespace Characters
         {
             _shooter.isFiring = value.isPressed;
         }
+
+        private void OnSecondaryFire(InputValue value)
+        {
+            _shooter.isFiringSecondary = value.isPressed;
+
+        }
         
         private void OnBomb(InputValue value)
         {

@@ -14,6 +14,15 @@ public class DamageDealer : MonoBehaviour
 
     public void Hit()
     {
-        //Destroy(gameObject);
+        if (gameObject.CompareTag("Laser"))
+        {
+            Destroy(gameObject);
+            //Debug.Log("D-Dealer Hit " + gameObject);
+        }
+        else
+        {
+            //Debug.Log("D-Dealer Hit Else" + gameObject);
+
+        }
     }
 }
