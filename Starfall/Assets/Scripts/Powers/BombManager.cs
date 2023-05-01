@@ -34,7 +34,7 @@ namespace Powers
             if (_currentQuantity < maxQuantity )
             {
                 _currentQuantity += quantity;
-                Debug.Log("Bombs added " + _currentQuantity);
+                //Debug.Log("Bombs added " + _currentQuantity);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Powers
             _animator.SetTrigger("Explode");
             _cameraShake.PlayBomb();
             _currentQuantity -= 1;
-            Debug.Log("Bombed " + _currentQuantity);
+            //Debug.Log("Bombed " + _currentQuantity);
             
             var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 

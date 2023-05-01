@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 6166428603154725379}
   - component: {fileID: 1434538728436080604}
   - component: {fileID: 3878264250727014418}
-  - component: {fileID: 1629074917635414513}
   - component: {fileID: 377015292446204780}
   - component: {fileID: 4287257696508089118}
   - component: {fileID: 4287257696508089185}
   - component: {fileID: 2447370517467041474}
+  - component: {fileID: -4903203854013434450}
   m_Layer: 7
   m_Name: Enemy A
   m_TagString: Enemy
@@ -110,19 +110,6 @@ MonoBehaviour:
   passiveHealthRestorationDelay: 1
   hitEffect: {fileID: 3420023136322087538, guid: 898eda81e063b6d44928f0a468535e4a, type: 3}
   applyCameraShake: 0
---- !u!114 &1629074917635414513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4287257696508089184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbbae7fe0732075498ddc317fe5dbc72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!114 &377015292446204780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,10 +126,17 @@ MonoBehaviour:
   projectileSpeed: 2
   projectileLifetime: 2
   baseFiringRate: 1
+  energyCost: 0
+  projectilePrefabSecondary: {fileID: 0}
+  projectileSpeedSecondary: 10
+  projectileLifetimeSecondary: 5
+  baseFiringRateSecondary: 0.2
+  energyCostSecondary: 0
   useAI: 1
   firingRateVariance: 0.5
   minimumFiringRate: 0.1
   isFiring: 0
+  isFiringSecondary: 0
 --- !u!95 &4287257696508089118
 Animator:
   serializedVersion: 4
@@ -238,3 +232,16 @@ MonoBehaviour:
     lifespan: 6
     dropRate: 20
   itemSpeed: 0.1
+--- !u!114 &-4903203854013434450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287257696508089184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbae7fe0732075498ddc317fe5dbc72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10

@@ -87,20 +87,21 @@ namespace Powers
         private void OnTriggerEnter2D(Collider2D other)
         {
             // Get the DamageDealer component from the collider
-            //var damageDealer = other.GetComponent<DamageDealer>();
+            var damageDealer = other.GetComponent<DamageDealer>();
 
-            DamageDealer damageDealer = null;
             
-            if (other.gameObject.CompareTag("Laser"))
-            {
-                damageDealer = other.GetComponent<DamageDealer>();
-            }
-            else
-            {
+            
+            //DamageDealer damageDealer = null;
+            //if (other.gameObject.CompareTag("Laser"))
+            //{
+              //  damageDealer = other.GetComponent<DamageDealer>();
+            //}
+            //else
+            //{
                 //Debug.Log("Health damageDealer " + gameObject);
-
-            }
+                //}
             
+                
             // If there is no DamageDealer component, do nothing
             if (damageDealer == null) return;
             // Take damage from the DamageDealer

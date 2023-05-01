@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Characters;
@@ -40,7 +41,9 @@ public class Shooter : MonoBehaviour
     private Player _player;
 
     private Energy _energy;
-
+    
+    
+    
     public float GetProjectileSpeed()
     {
         return projectileSpeed;
@@ -67,27 +70,47 @@ public class Shooter : MonoBehaviour
         }
     }
 
+    private float _lastFireTimePrimary = -0.5f;
+    private float _lastFireTimeSecondary = -0.5f;
+
     private void Update()
     {
-        // Call Fire() only when isFiring state changes
-        if (isFiring && _firingCoroutine == null)
-        {
-            Fire();
-        }
-        else if (!isFiring && _firingCoroutine != null)
-        {
-            StopCoroutine(_firingCoroutine);
-            _firingCoroutine = null;
-        }
+        if (!_player) return;
         
-        if (isFiringSecondary && _firingCoroutineSecondary == null)
+        switch (isFiring)
         {
-            Fire();
+            case true when _firingCoroutine == null:
+            {
+                if (_lastFireTimePrimary < 0f || Time.time - _lastFireTimePrimary >= baseFiringRate)
+                {
+                    _lastFireTimePrimary = Time.time;
+                    Fire();
+                }
+
+                break;
+            }
+            case false when _firingCoroutine != null:
+                StopCoroutine(_firingCoroutine);
+                _firingCoroutine = null;
+                break;
         }
-        else if (!isFiringSecondary && _firingCoroutineSecondary != null)
+
+        switch (isFiringSecondary)
         {
-            StopCoroutine(_firingCoroutineSecondary);
-            _firingCoroutineSecondary = null;
+            case true when _firingCoroutineSecondary == null:
+            {
+                if (_lastFireTimeSecondary < 0f || Time.time - _lastFireTimeSecondary >= baseFiringRateSecondary)
+                {
+                    _lastFireTimeSecondary = Time.time;
+                    Fire();
+                }
+
+                break;
+            }
+            case false when _firingCoroutineSecondary != null:
+                StopCoroutine(_firingCoroutineSecondary);
+                _firingCoroutineSecondary = null;
+                break;
         }
     }
 
@@ -96,7 +119,7 @@ public class Shooter : MonoBehaviour
         switch (isFiring)
         {
             case true when _firingCoroutine == null:
-                _firingCoroutine = StartCoroutine(FireContinuosly1());
+                _firingCoroutine = StartCoroutine(FireContinuoslyPrimary());
                 break;
             case false when _firingCoroutine != null:
                 StopCoroutine(_firingCoroutine);
@@ -107,7 +130,7 @@ public class Shooter : MonoBehaviour
         switch (isFiringSecondary)
         {
             case true when _firingCoroutineSecondary == null:
-                _firingCoroutineSecondary = StartCoroutine(FireContinuosly2());
+                _firingCoroutineSecondary = StartCoroutine(FireContinuoslySecondary());
                 break;
             case false when _firingCoroutineSecondary != null:
                 StopCoroutine(_firingCoroutineSecondary);
@@ -116,18 +139,10 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    public Quaternion Vector3ToQuaternion(Vector3 vector)
-    {
-        Vector3 vectorToTarget = vector - transform.position;
-        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        
-        return q;
-    }
 
-    IEnumerator FireContinuosly1()
+    IEnumerator FireContinuoslyPrimary()
     {
-        while (true)
+        while (_player)
         {
             if (_player)
             {
@@ -165,23 +180,21 @@ public class Shooter : MonoBehaviour
                 
                     Destroy(instance, projectileLifetime);
                 }
-                
-                
+
+                var timeToNextProjectile = Random.Range(baseFiringRate - firingRateVariance, baseFiringRate + firingRateVariance);
+            
+                timeToNextProjectile = Mathf.Clamp(timeToNextProjectile, minimumFiringRate, float.MaxValue);
+            
+                yield return new WaitForSeconds(timeToNextProjectile);
             }
             
-            
-            var timeToNextProjectile = Random.Range(baseFiringRate - firingRateVariance, baseFiringRate + firingRateVariance);
-            
-            timeToNextProjectile = Mathf.Clamp(timeToNextProjectile, minimumFiringRate, float.MaxValue);
-
-            yield return new WaitForSeconds(timeToNextProjectile);
 
         }
     }
     
-    IEnumerator FireContinuosly2()
+    IEnumerator FireContinuoslySecondary()
     {
-        while (true)
+        while (_player)
         {
             if (_player)
             {
@@ -215,4 +228,13 @@ public class Shooter : MonoBehaviour
         }
     }
 
+    
+    public Quaternion Vector3ToQuaternion(Vector3 vector)
+    {
+        Vector3 vectorToTarget = vector - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        
+        return q;
+    }
 }
