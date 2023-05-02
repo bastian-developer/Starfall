@@ -4938,7 +4938,7 @@ MonoBehaviour:
   isPlayer: 1
   score: 0
   maxHealth: 200
-  passiveHealthRestoration: 2
+  passiveHealthRestoration: 1
   passiveHealthRestorationDelay: 0.5
   hitEffect: {fileID: 3420023136322087538, guid: 20253faf26086344a9f6133990e24b94, type: 3}
   applyCameraShake: 1
@@ -4977,12 +4977,12 @@ MonoBehaviour:
   projectileSpeed: 3
   projectileLifetime: 2
   baseFiringRate: 0.2
-  energyCost: 2
-  projectilePrefabSecondary: {fileID: 7306692227792423664, guid: fea9d4d105e5273459c7168699478bd4, type: 3}
+  energyCost: 3
+  projectilePrefabSecondary: {fileID: 5485815519459811753, guid: b47e5a442c85baf468aa594d852dc613, type: 3}
   projectileSpeedSecondary: 2
   projectileLifetimeSecondary: 2
   baseFiringRateSecondary: 0.2
-  energyCostSecondary: 5
+  lifeCostSecondary: 2
   useAI: 0
   firingRateVariance: 0
   minimumFiringRate: 0.1
@@ -5168,8 +5168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65486c479c52b7498d98df565ee23f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnergy: 300
-  passiveEnergyRestoration: 3
+  maxEnergy: 200
+  passiveEnergyRestoration: 2
   passiveEnergyRestorationDelay: 0.5
 --- !u!114 &8341319436927852832
 MonoBehaviour:

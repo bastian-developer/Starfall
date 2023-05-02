@@ -56,6 +56,20 @@ namespace Powers
             }
         }
         
+        //Discounts LifeCost of source
+        public bool PayLifeCost(int lifeCost, string source)
+        {
+            if (_currentHealth <= lifeCost)
+            {
+                return false;
+            }
+            else
+            {
+                _currentHealth -= lifeCost;
+                return true;
+            }
+        }
+        
         private void Update()
         {
             switch (isPlayer)

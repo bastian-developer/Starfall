@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Characters;
 using UnityEngine;
 
 namespace Powers
@@ -23,6 +24,7 @@ namespace Powers
         private Shield _currentShield;
         private Energy _playerEnergy;
         private Coroutine _shieldingSoundCoroutine;
+        private Player _player;
         
         private bool _shieldSwitch;
         private bool _isShielded;
@@ -32,6 +34,7 @@ namespace Powers
 
         private void Awake()
         {
+            _player = FindObjectOfType<Player>();
             _shieldAnimator1 = shieldPrefab1.GetComponent<Animator>();
             _shieldAnimator2 = shieldPrefab2.GetComponent<Animator>();
             _shieldAudioSourceSegment = gameObject.AddComponent<AudioSource>();
@@ -52,7 +55,7 @@ namespace Powers
         public void StartShield()
         {
             // Check if shield is already active or if player can't pay the energy cost
-            if (_isShielded || !_playerEnergy.PayEnergyCost(_currentShield.EnergyActivationCost, "Shielding")) return;
+            if (!_player ||_isShielded || !_playerEnergy.PayEnergyCost(_currentShield.EnergyActivationCost, "Shielding")) return;
             
             // Stop shield animation playback and activate the shield game object
             _currentShieldAnimator.StopPlayback();

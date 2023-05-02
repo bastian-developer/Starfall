@@ -26,7 +26,7 @@ namespace Enemies
         [SerializeField] private float projectileSpeedSecondary = 10f;
         [SerializeField] private float projectileLifetimeSecondary = 5f;
         [SerializeField] private float baseFiringRateSecondary = 0.2f;
-        [SerializeField] private int energyCostSecondary;
+        [SerializeField] private int lifeCostSecondary;
 
 
         [Header("AI")] [SerializeField] private bool useAI;
@@ -45,6 +45,8 @@ namespace Enemies
         private Player _player;
 
         private Energy _energy;
+        private Health _health;
+
 
 
 
@@ -63,6 +65,7 @@ namespace Enemies
             _audioPlayer = FindObjectOfType<AudioPlayer>();
             _player = FindObjectOfType<Player>();
             _energy = FindObjectOfType<Energy>();
+            _health = GetComponent<Health>();
         }
 
 
@@ -123,7 +126,7 @@ namespace Enemies
             switch (isFiring)
             {
                 case true when _firingCoroutine == null:
-                    _firingCoroutine = StartCoroutine(FireContinuoslyPrimary());
+                    _firingCoroutine = StartCoroutine(FireContinuouslyPrimary());
                     break;
                 case false when _firingCoroutine != null:
                     StopCoroutine(_firingCoroutine);
@@ -134,7 +137,7 @@ namespace Enemies
             switch (isFiringSecondary)
             {
                 case true when _firingCoroutineSecondary == null:
-                    _firingCoroutineSecondary = StartCoroutine(FireContinuoslySecondary());
+                    _firingCoroutineSecondary = StartCoroutine(FireContinuouslySecondary());
                     break;
                 case false when _firingCoroutineSecondary != null:
                     StopCoroutine(_firingCoroutineSecondary);
@@ -144,7 +147,7 @@ namespace Enemies
         }
 
 
-        IEnumerator FireContinuoslyPrimary()
+        private IEnumerator FireContinuouslyPrimary()
         {
             while (_player)
             {
@@ -158,8 +161,8 @@ namespace Enemies
                     if (!useAI && _energy.PayEnergyCost(energyCost, "Shooting"))
                     {
                         //Get Mouse position to calculate bullet direction
-                        instance = Instantiate(projectilePrefab, transform.position, playerRotation);
-                        _audioPlayer.PlayRedLaserClip();
+                        instance = Instantiate(projectilePrefab, transform.position , playerRotation);
+                        _audioPlayer.PlayMainWeaponClip();
 
                         Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
 
@@ -174,7 +177,7 @@ namespace Enemies
                     {
                         instance = Instantiate(projectilePrefab, transform.position,
                             Vector3ToQuaternion(playerPosition));
-                        _audioPlayer.PlayGreenLaserClip();
+                        _audioPlayer.PlayEnemyLaserClip();
                         ;
 
                         Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
@@ -199,12 +202,48 @@ namespace Enemies
             }
         }
 
-        IEnumerator FireContinuoslySecondary()
+        private IEnumerator FireContinuouslySecondary()
         {
             while (_player)
             {
                 if (_player)
                 {
+                    
+                    var transform1 = _player.transform;
+                    var playerPosition = transform1.position;
+                    var playerRotation = transform1.rotation;
+
+                    GameObject instanceLeft, instanceRight;
+                    if (!useAI && _health.PayLifeCost(lifeCostSecondary, "Shooting"))
+                    {
+                        // Get the position of the left and right sides of the player
+                        var leftPosition = playerPosition + (-transform1.right * 0.05f);
+                        var rightPosition = playerPosition + (transform1.right * 0.05f);
+
+                        // Instantiate bullets at the left and right positions with the same rotation as the player
+                        instanceLeft = Instantiate(projectilePrefabSecondary, leftPosition, playerRotation);
+                        instanceRight = Instantiate(projectilePrefabSecondary, rightPosition, playerRotation);
+
+                        // Play the sound effect for shooting
+                        _audioPlayer.PlaySecondaryWeaponClip();
+
+                        // Set the velocity of the bullets to move upwards
+                        var rbLeft = instanceLeft.GetComponent<Rigidbody2D>();
+                        var rbRight = instanceRight.GetComponent<Rigidbody2D>();
+
+                        if (rbLeft != null && rbRight != null)
+                        {
+                            rbLeft.velocity = transform.up * projectileSpeedSecondary;
+                            rbRight.velocity = transform.up * projectileSpeedSecondary;
+                        }
+
+                        // Destroy the bullets after a set amount of time
+                        Destroy(instanceLeft, projectileLifetimeSecondary);
+                        Destroy(instanceRight, projectileLifetimeSecondary);
+                    }
+                    
+                    
+                    /*
                     var transform1 = _player.transform;
                     var playerRotation = transform1.rotation;
 
@@ -225,7 +264,8 @@ namespace Enemies
                         }
 
                         Destroy(instance, projectileLifetimeSecondary);
-                    }
+                        
+                    }*/
                 }
 
 

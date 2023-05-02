@@ -2579,6 +2579,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1598714571}
     m_Modifications:
+    - target: {fileID: 411816082063273884, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
+      propertyPath: energyCostSecondary
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 411816082063273884, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
+      propertyPath: baseFiringRateSecondary
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 411816082063273884, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
+      propertyPath: projectilePrefabSecondary
+      value: 
+      objectReference: {fileID: 5485815519459811753, guid: b47e5a442c85baf468aa594d852dc613, type: 3}
     - target: {fileID: 939394727701664509, guid: b2308ad239b477d4cbe95a7bccb11fa7, type: 3}
       propertyPath: m_RootOrder
       value: 0

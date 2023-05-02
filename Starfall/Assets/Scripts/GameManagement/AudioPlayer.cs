@@ -9,36 +9,38 @@ namespace GameManagement
     public class AudioPlayer : MonoBehaviour
 {
     [Header("Shooting")] 
-    [SerializeField] AudioClip greenLaserClip;
-    [SerializeField] [Range(0f, 1f)] float greenLaserVolume = 1f;
-    [SerializeField] AudioClip redLaserClip;
-    [SerializeField] [Range(0f, 1f)] float redLaserVolume = 1f;
-
+    [SerializeField] private AudioClip enemyLaserClip;
+    [SerializeField] [Range(0f, 1f)] private float enemyLaserVolume = 1f;
+    [SerializeField] private AudioClip mainWeaponClip;
+    [SerializeField] [Range(0f, 1f)] private float mainWeaponVolume = 1f;
+    [SerializeField] private AudioClip secondaryWeaponClip;
+    [SerializeField] [Range(0f, 1f)] private float secondaryWeaponVolume = 1f;
+    
     [Header("Powers")] 
-    [SerializeField] AudioClip shieldClip;
-    [SerializeField] [Range(0f, 1f)] float shieldClipVolume = 1f;
-    [SerializeField] AudioClip explosionClip;
-    [SerializeField] [Range(0f, 1f)] float explosionClipVolume = 1f;
+    [SerializeField] private AudioClip shieldClip;
+    [SerializeField] [Range(0f, 1f)] private float shieldClipVolume = 1f;
+    [SerializeField] private AudioClip explosionClip;
+    [SerializeField] [Range(0f, 1f)] private float explosionClipVolume = 1f;
 
     [Header("Items")] 
-    [SerializeField] AudioClip energyBatteryClip;
-    [SerializeField] [Range(0f, 1f)] float energyBatteryVolume = 1f;
-    [SerializeField] AudioClip lifeBatteryClip;
-    [SerializeField] [Range(0f, 1f)] float lifeBatteryVolume = 1f;
-    [SerializeField] AudioClip bombClip;
-    [SerializeField] [Range(0f, 1f)] float bombClipVolume = 1f;
+    [SerializeField] private AudioClip energyBatteryClip;
+    [SerializeField] [Range(0f, 1f)] private float energyBatteryVolume = 1f;
+    [SerializeField] private AudioClip lifeBatteryClip;
+    [SerializeField] [Range(0f, 1f)] private float lifeBatteryVolume = 1f;
+    [SerializeField] private AudioClip bombClip;
+    [SerializeField] [Range(0f, 1f)] private float bombClipVolume = 1f;
     
     [Header("Damage")] 
-    [SerializeField] AudioClip playerDamageClip;
-    [SerializeField] [Range(0f, 1f)] float playerDamageVolume = 1f;
-    [SerializeField] AudioClip alienDamageClip;
-    [SerializeField] [Range(0f, 1f)] float alienDamageVolume = 1f;
+    [SerializeField] private AudioClip playerDamageClip;
+    [SerializeField] [Range(0f, 1f)] private float playerDamageVolume = 1f;
+    [SerializeField] private AudioClip alienDamageClip;
+    [SerializeField] [Range(0f, 1f)] private float alienDamageVolume = 1f;
 
     [Header("Menu")] 
-    [SerializeField] AudioClip buttonPressedClip;
-    [SerializeField] [Range(0f, 1f)] float buttonPressedVolume = 1f;
-    [SerializeField] AudioClip buttonHoverClip;
-    [SerializeField] [Range(0f, 1f)] float buttonHoverVolume = 1f;
+    [SerializeField] private AudioClip buttonPressedClip;
+    [SerializeField] [Range(0f, 1f)] private float buttonPressedVolume = 1f;
+    [SerializeField] private AudioClip buttonHoverClip;
+    [SerializeField] [Range(0f, 1f)] private float buttonHoverVolume = 1f;
     
     //Singleton
     private static AudioPlayer _audioInstance;
@@ -92,14 +94,19 @@ namespace GameManagement
         PlayClip(shieldClip, shieldClipVolume);
     }
     
-    public void PlayGreenLaserClip()
+    public void PlayEnemyLaserClip()
     {
-        PlayClip(greenLaserClip, greenLaserVolume);
+        PlayClip(enemyLaserClip, enemyLaserVolume);
     }
     
-    public void PlayRedLaserClip()
+    public void PlayMainWeaponClip()
     {
-        PlayClip(redLaserClip, redLaserVolume);
+        PlayClip(mainWeaponClip, mainWeaponVolume);
+    }
+    
+    public void PlaySecondaryWeaponClip()
+    {
+        PlayClip(secondaryWeaponClip, secondaryWeaponVolume);
     }
 
     public void PlayAlienDamageClip()

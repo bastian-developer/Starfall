@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameManagement;
+using Powers;
 
-
-namespace Powers
+namespace Items
 {
     public class Bomb : MonoBehaviour
     {

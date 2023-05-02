@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e0badb8b2884747a2095ad155b7d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenLaserClip: {fileID: 8300000, guid: 466c713ae2bc302489ec803c06e06911, type: 3}
-  greenLaserVolume: 0.15
-  redLaserClip: {fileID: 8300000, guid: ea2d20c51ccc7c44aaa30aa946870de5, type: 3}
-  redLaserVolume: 0.4
+  enemyLaserClip: {fileID: 8300000, guid: 466c713ae2bc302489ec803c06e06911, type: 3}
+  enemyLaserVolume: 0.392
+  mainWeaponClip: {fileID: 8300000, guid: ea2d20c51ccc7c44aaa30aa946870de5, type: 3}
+  mainWeaponVolume: 0.421
+  secondaryWeaponClip: {fileID: 8300000, guid: e25034ad35d48af42999d4ce55008e91, type: 3}
+  secondaryWeaponVolume: 0.593
   shieldClip: {fileID: 8300000, guid: 6c9ed84229d203240b6b7b18674deecc, type: 3}
   shieldClipVolume: 0.715
   explosionClip: {fileID: 8300000, guid: fc208d92a45e2f7479ad1d95d35dda32, type: 3}
