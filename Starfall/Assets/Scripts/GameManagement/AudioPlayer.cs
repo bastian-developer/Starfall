@@ -29,6 +29,8 @@ namespace GameManagement
     [SerializeField] [Range(0f, 1f)] private float lifeBatteryVolume = 1f;
     [SerializeField] private AudioClip bombClip;
     [SerializeField] [Range(0f, 1f)] private float bombClipVolume = 1f;
+    [SerializeField] private AudioClip coinClip;
+    [SerializeField] [Range(0f, 1f)] private float coinClipVolume = 1f;
     
     [Header("Damage")] 
     [SerializeField] private AudioClip playerDamageClip;
@@ -69,6 +71,11 @@ namespace GameManagement
         }
     }
 
+    public void PlayCoinClip()
+    {
+        PlayClip(coinClip, coinClipVolume);
+    }
+    
     public void PlayBombClip()
     {
         PlayClip(bombClip, bombClipVolume);

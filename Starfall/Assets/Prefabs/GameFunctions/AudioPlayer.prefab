@@ -61,6 +61,8 @@ MonoBehaviour:
   lifeBatteryVolume: 1
   bombClip: {fileID: 8300000, guid: ea31ca7ef3002bd4c9c78b4ad25abeba, type: 3}
   bombClipVolume: 1
+  coinClip: {fileID: 8300000, guid: 295873fd33643544ebb0ce74dc226a5e, type: 3}
+  coinClipVolume: 1
   playerDamageClip: {fileID: 8300000, guid: 9a6a53d1fedc2434aa5df08e70ec053f, type: 3}
   playerDamageVolume: 0.412
   alienDamageClip: {fileID: 8300000, guid: b061dfca3dd9e6043a20e5f1804f60e0, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Powers;
+using Items;
 
 namespace GameManagement
 {
@@ -22,6 +23,10 @@ namespace GameManagement
         [SerializeField] private TextMeshProUGUI scoreText;
         private ScoreKeeper _scoreKeeper;
 
+        [Header("Coins")]
+        [SerializeField] private TextMeshProUGUI coinText;
+        private CoinManager _coinManager;
+        
         [Header("Bombs")]
         [SerializeField] private TextMeshProUGUI bombText;
         private BombManager _bombManager;
@@ -32,6 +37,7 @@ namespace GameManagement
             _playerHealth = FindObjectOfType<Health>();
             _playerEnergy = FindObjectOfType<Energy>();
             _bombManager = FindObjectOfType<BombManager>();
+            _coinManager = FindObjectOfType<CoinManager>();
         }
 
         private void Start()
@@ -46,6 +52,7 @@ namespace GameManagement
             energySlider.value = _playerEnergy.CurrentEnergy;
             scoreText.text = _scoreKeeper.GetScore().ToString("000000000");
             bombText.text = "* " + _bombManager.CurrentBombs.ToString();
+            coinText.text = "* " + _coinManager.CurrentCoins.ToString();
         }
 
     }
