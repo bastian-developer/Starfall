@@ -1,6 +1,7 @@
 using Powers;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Enemies;
 
 namespace Characters
 {

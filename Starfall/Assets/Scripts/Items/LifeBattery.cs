@@ -1,6 +1,7 @@
 using Characters;
 using UnityEngine;
 using Powers;
+using GameManagement;
 
 namespace Items
 {

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class AudioPlayer : MonoBehaviour
+namespace GameManagement
+{
+    public class AudioPlayer : MonoBehaviour
 {
     [Header("Shooting")] 
     [SerializeField] AudioClip greenLaserClip;
@@ -29,7 +31,6 @@ public class AudioPlayer : MonoBehaviour
     [Header("Damage")] 
     [SerializeField] AudioClip playerDamageClip;
     [SerializeField] [Range(0f, 1f)] float playerDamageVolume = 1f;
-    
     [SerializeField] AudioClip alienDamageClip;
     [SerializeField] [Range(0f, 1f)] float alienDamageVolume = 1f;
 
@@ -39,9 +40,8 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip buttonHoverClip;
     [SerializeField] [Range(0f, 1f)] float buttonHoverVolume = 1f;
     
-    
+    //Singleton
     private static AudioPlayer _audioInstance;
-
     
     public AudioPlayer GetInstance()
     {
@@ -117,13 +117,11 @@ public class AudioPlayer : MonoBehaviour
         PlayClip(buttonPressedClip, buttonPressedVolume);
     }
     
-    
     public void PlayButtonHoverClip()
     {
         PlayClip(buttonHoverClip, buttonHoverVolume);
     }
-
-
+    
     void PlayClip(AudioClip clip, float volume)
     {
         if (clip != null)
@@ -132,4 +130,5 @@ public class AudioPlayer : MonoBehaviour
             AudioSource.PlayClipAtPoint(clip, cameraPos, volume);
         }
     }
+}
 }
